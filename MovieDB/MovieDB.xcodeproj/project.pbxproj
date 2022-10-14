@@ -15,6 +15,27 @@
 		580E3B6828F72D14006A2A7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 580E3B6628F72D14006A2A7A /* LaunchScreen.storyboard */; };
 		580E3B7328F72D14006A2A7A /* MovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580E3B7228F72D14006A2A7A /* MovieDBTests.swift */; };
 		580E3B8F28F7306D006A2A7A /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 580E3B8E28F7306D006A2A7A /* ColorAssets.xcassets */; };
+		584C0F2E28F7ADCE00A45ED0 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F2C28F7ADCE00A45ED0 /* HomePageViewController.swift */; };
+		584C0F2F28F7ADCE00A45ED0 /* HomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584C0F2D28F7ADCE00A45ED0 /* HomePageViewController.xib */; };
+		584C0F3328F7B2C900A45ED0 /* TVShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F3128F7B2C900A45ED0 /* TVShowCollectionViewCell.swift */; };
+		584C0F3428F7B2C900A45ED0 /* TVShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584C0F3228F7B2C900A45ED0 /* TVShowCollectionViewCell.xib */; };
+		584C0F3828F7EE4600A45ED0 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F3728F7EE4600A45ED0 /* UIViewController+Extensions.swift */; };
+		584C0F3A28F7EE9300A45ED0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F3928F7EE9300A45ED0 /* Constants.swift */; };
+		584C0F3F28F7F57500A45ED0 /* SF-Pro-Text-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 584C0F3C28F7F3B700A45ED0 /* SF-Pro-Text-Regular.ttf */; };
+		584C0F4028F7F57800A45ED0 /* SF-Pro-Text-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 584C0F3B28F7F3B100A45ED0 /* SF-Pro-Text-Bold.ttf */; };
+		584C0F4128F7F57B00A45ED0 /* SF-Pro-Text-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 584C0F3E28F7F48800A45ED0 /* SF-Pro-Text-Medium.ttf */; };
+		584C0F4428F804A900A45ED0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 584C0F4328F804A900A45ED0 /* IQKeyboardManagerSwift */; };
+		584C0F4628F809A600A45ED0 /* UICollectionViewGenericDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F4528F809A600A45ED0 /* UICollectionViewGenericDelegate.swift */; };
+		584C0F4828F8139600A45ED0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F4728F8139600A45ED0 /* UIView+Extensions.swift */; };
+		584C0F4C28F81FBF00A45ED0 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F4B28F81FBF00A45ED0 /* CustomError.swift */; };
+		584C0F4E28F81FDC00A45ED0 /* NetworkingErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F4D28F81FDC00A45ED0 /* NetworkingErrorHandler.swift */; };
+		584C0F5028F81FF400A45ED0 /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F4F28F81FF400A45ED0 /* NetworkClass.swift */; };
+		584C0F5228F83E3800A45ED0 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F5128F83E3800A45ED0 /* MovieModel.swift */; };
+		584C0F5428F8408F00A45ED0 /* ApiEndPointHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F5328F8408F00A45ED0 /* ApiEndPointHandler.swift */; };
+		584C0F5628F8473B00A45ED0 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F5528F8473B00A45ED0 /* HomePageViewModel.swift */; };
+		584C0F5828F8910600A45ED0 /* StructToModelAllCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F5728F8910600A45ED0 /* StructToModelAllCategories.swift */; };
+		584C0F5A28F8B9E700A45ED0 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F5928F8B9E700A45ED0 /* NetworkServiceProtocol.swift */; };
+		584C0F6028F965D100A45ED0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 584C0F5F28F965D100A45ED0 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +68,25 @@
 		580E3B7228F72D14006A2A7A /* MovieDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBTests.swift; sourceTree = "<group>"; };
 		580E3B7828F72D14006A2A7A /* MovieDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		580E3B8E28F7306D006A2A7A /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
-		584C0F2928F77B6A00A45ED0 /* FontsFree-Net-SFProText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FontsFree-Net-SFProText-Bold.ttf"; path = "../../../../../../../../../Downloads/Fonts/FontsFree-Net-SFProText-Bold.ttf"; sourceTree = "<group>"; };
+		584C0F2C28F7ADCE00A45ED0 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		584C0F2D28F7ADCE00A45ED0 /* HomePageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageViewController.xib; sourceTree = "<group>"; };
+		584C0F3128F7B2C900A45ED0 /* TVShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowCollectionViewCell.swift; sourceTree = "<group>"; };
+		584C0F3228F7B2C900A45ED0 /* TVShowCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVShowCollectionViewCell.xib; sourceTree = "<group>"; };
+		584C0F3728F7EE4600A45ED0 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		584C0F3928F7EE9300A45ED0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		584C0F3B28F7F3B100A45ED0 /* SF-Pro-Text-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Text-Bold.ttf"; path = "../../../../../../../../../Downloads/Fonts/SF-Pro-Text-Bold.ttf"; sourceTree = "<group>"; };
+		584C0F3C28F7F3B700A45ED0 /* SF-Pro-Text-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Text-Regular.ttf"; path = "../../../../../../../../../Downloads/Fonts/SF-Pro-Text-Regular.ttf"; sourceTree = "<group>"; };
+		584C0F3E28F7F48800A45ED0 /* SF-Pro-Text-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Text-Medium.ttf"; path = "../../../../../../../../../Downloads/Fonts/SF-Pro-Text-Medium.ttf"; sourceTree = "<group>"; };
+		584C0F4528F809A600A45ED0 /* UICollectionViewGenericDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewGenericDelegate.swift; sourceTree = "<group>"; };
+		584C0F4728F8139600A45ED0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		584C0F4B28F81FBF00A45ED0 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		584C0F4D28F81FDC00A45ED0 /* NetworkingErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingErrorHandler.swift; sourceTree = "<group>"; };
+		584C0F4F28F81FF400A45ED0 /* NetworkClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClass.swift; sourceTree = "<group>"; };
+		584C0F5128F83E3800A45ED0 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		584C0F5328F8408F00A45ED0 /* ApiEndPointHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPointHandler.swift; sourceTree = "<group>"; };
+		584C0F5528F8473B00A45ED0 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
+		584C0F5728F8910600A45ED0 /* StructToModelAllCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructToModelAllCategories.swift; sourceTree = "<group>"; };
+		584C0F5928F8B9E700A45ED0 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584C0F6028F965D100A45ED0 /* SDWebImage in Frameworks */,
+				584C0F4428F804A900A45ED0 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +143,7 @@
 				580E3B8C28F7301C006A2A7A /* CustomViews */,
 				580E3B8D28F73027006A2A7A /* Utilities */,
 				580E3B6128F72D13006A2A7A /* Main.storyboard */,
+				584C0F2D28F7ADCE00A45ED0 /* HomePageViewController.xib */,
 				580E3B6428F72D14006A2A7A /* Assets.xcassets */,
 				580E3B8E28F7306D006A2A7A /* ColorAssets.xcassets */,
 				580E3B6628F72D14006A2A7A /* LaunchScreen.storyboard */,
@@ -130,6 +172,9 @@
 		580E3B8C28F7301C006A2A7A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				584C0F3728F7EE4600A45ED0 /* UIViewController+Extensions.swift */,
+				584C0F4528F809A600A45ED0 /* UICollectionViewGenericDelegate.swift */,
+				584C0F4728F8139600A45ED0 /* UIView+Extensions.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -137,6 +182,8 @@
 		580E3B8D28F73027006A2A7A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				584C0F3928F7EE9300A45ED0 /* Constants.swift */,
+				584C0F4A28F81FA400A45ED0 /* ServiceClass */,
 				584C0F2828F77B5300A45ED0 /* Fonts */,
 			);
 			path = Utilities;
@@ -155,6 +202,7 @@
 		580E3B9128F7309C006A2A7A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				584C0F5528F8473B00A45ED0 /* HomePageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -162,6 +210,8 @@
 		580E3B9228F730A6006A2A7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				584C0F5128F83E3800A45ED0 /* MovieModel.swift */,
+				584C0F5728F8910600A45ED0 /* StructToModelAllCategories.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -169,7 +219,7 @@
 		580E3B9328F7311F006A2A7A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				580E3B5F28F72D13006A2A7A /* ViewController.swift */,
+				584C0F4928F81DAC00A45ED0 /* HomePage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,9 +227,42 @@
 		584C0F2828F77B5300A45ED0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				584C0F2928F77B6A00A45ED0 /* FontsFree-Net-SFProText-Bold.ttf */,
+				584C0F3C28F7F3B700A45ED0 /* SF-Pro-Text-Regular.ttf */,
+				584C0F3B28F7F3B100A45ED0 /* SF-Pro-Text-Bold.ttf */,
+				584C0F3E28F7F48800A45ED0 /* SF-Pro-Text-Medium.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		584C0F3028F7B24A00A45ED0 /* TVShowCell */ = {
+			isa = PBXGroup;
+			children = (
+				584C0F3128F7B2C900A45ED0 /* TVShowCollectionViewCell.swift */,
+				584C0F3228F7B2C900A45ED0 /* TVShowCollectionViewCell.xib */,
+			);
+			path = TVShowCell;
+			sourceTree = "<group>";
+		};
+		584C0F4928F81DAC00A45ED0 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				580E3B5F28F72D13006A2A7A /* ViewController.swift */,
+				584C0F2C28F7ADCE00A45ED0 /* HomePageViewController.swift */,
+				584C0F3028F7B24A00A45ED0 /* TVShowCell */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		584C0F4A28F81FA400A45ED0 /* ServiceClass */ = {
+			isa = PBXGroup;
+			children = (
+				584C0F4F28F81FF400A45ED0 /* NetworkClass.swift */,
+				584C0F4B28F81FBF00A45ED0 /* CustomError.swift */,
+				584C0F4D28F81FDC00A45ED0 /* NetworkingErrorHandler.swift */,
+				584C0F5328F8408F00A45ED0 /* ApiEndPointHandler.swift */,
+				584C0F5928F8B9E700A45ED0 /* NetworkServiceProtocol.swift */,
+			);
+			path = ServiceClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +281,10 @@
 			dependencies = (
 			);
 			name = MovieDB;
+			packageProductDependencies = (
+				584C0F4328F804A900A45ED0 /* IQKeyboardManagerSwift */,
+				584C0F5F28F965D100A45ED0 /* SDWebImage */,
+			);
 			productName = MovieDB;
 			productReference = 580E3B5828F72D13006A2A7A /* MovieDB.app */;
 			productType = "com.apple.product-type.application";
@@ -270,6 +357,10 @@
 				Base,
 			);
 			mainGroup = 580E3B4F28F72D13006A2A7A;
+			packageReferences = (
+				584C0F4228F804A900A45ED0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				584C0F5E28F965D100A45ED0 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 580E3B5928F72D13006A2A7A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -286,10 +377,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584C0F4128F7F57B00A45ED0 /* SF-Pro-Text-Medium.ttf in Resources */,
 				580E3B6828F72D14006A2A7A /* LaunchScreen.storyboard in Resources */,
+				584C0F3F28F7F57500A45ED0 /* SF-Pro-Text-Regular.ttf in Resources */,
+				584C0F2F28F7ADCE00A45ED0 /* HomePageViewController.xib in Resources */,
 				580E3B6528F72D14006A2A7A /* Assets.xcassets in Resources */,
 				580E3B8F28F7306D006A2A7A /* ColorAssets.xcassets in Resources */,
 				580E3B6328F72D13006A2A7A /* Main.storyboard in Resources */,
+				584C0F3428F7B2C900A45ED0 /* TVShowCollectionViewCell.xib in Resources */,
+				584C0F4028F7F57800A45ED0 /* SF-Pro-Text-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,9 +410,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				584C0F3828F7EE4600A45ED0 /* UIViewController+Extensions.swift in Sources */,
+				584C0F2E28F7ADCE00A45ED0 /* HomePageViewController.swift in Sources */,
+				584C0F3328F7B2C900A45ED0 /* TVShowCollectionViewCell.swift in Sources */,
+				584C0F4E28F81FDC00A45ED0 /* NetworkingErrorHandler.swift in Sources */,
+				584C0F5A28F8B9E700A45ED0 /* NetworkServiceProtocol.swift in Sources */,
+				584C0F4828F8139600A45ED0 /* UIView+Extensions.swift in Sources */,
+				584C0F5028F81FF400A45ED0 /* NetworkClass.swift in Sources */,
+				584C0F5828F8910600A45ED0 /* StructToModelAllCategories.swift in Sources */,
+				584C0F5228F83E3800A45ED0 /* MovieModel.swift in Sources */,
 				580E3B6028F72D13006A2A7A /* ViewController.swift in Sources */,
+				584C0F4C28F81FBF00A45ED0 /* CustomError.swift in Sources */,
+				584C0F3A28F7EE9300A45ED0 /* Constants.swift in Sources */,
+				584C0F5428F8408F00A45ED0 /* ApiEndPointHandler.swift in Sources */,
+				584C0F4628F809A600A45ED0 /* UICollectionViewGenericDelegate.swift in Sources */,
 				580E3B5C28F72D13006A2A7A /* AppDelegate.swift in Sources */,
 				580E3B5E28F72D13006A2A7A /* SceneDelegate.swift in Sources */,
+				584C0F5628F8473B00A45ED0 /* HomePageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +768,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		584C0F4228F804A900A45ED0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		584C0F5E28F965D100A45ED0 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		584C0F4328F804A900A45ED0 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 584C0F4228F804A900A45ED0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		584C0F5F28F965D100A45ED0 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 584C0F5E28F965D100A45ED0 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 580E3B5028F72D13006A2A7A /* Project object */;
 }
