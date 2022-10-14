@@ -9,7 +9,10 @@ import Foundation
 import Combine
 
 final class NetworkManagerRepository: MovieService {
-    
+  
+//    func networkRequest<T>(from endpoint: ApiEndPointHandler) -> Future<[T], NetworkingError> {
+//        <#code#>
+//    }
     public static let shared = NetworkManagerRepository()
     private init () {}
     private let apiKey = Constants.ApiParameter.apiKey
