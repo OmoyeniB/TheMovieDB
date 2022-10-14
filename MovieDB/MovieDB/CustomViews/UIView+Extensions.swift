@@ -43,6 +43,14 @@ extension UIView {
         self.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
       }
     
+    func addShadowToImageView() {
+        self.layer.shadowRadius = 10
+        self.layer.shadowOffset = .zero
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowColor = UIColor.purple.cgColor
+        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        self.layer.masksToBounds = false
+    }
     
 }
 
