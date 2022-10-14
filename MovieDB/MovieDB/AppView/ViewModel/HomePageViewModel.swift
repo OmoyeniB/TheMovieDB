@@ -5,8 +5,8 @@
 //  Created by Sharon Omoyeni Babatunde on 13/10/2022.
 //
 
-protocol TransferData: AnyObject {
-    func completionHandler(_ model: [[MovieList]])
+protocol HomePageViewModelDelegate: AnyObject {
+    func errorNotifier(_ error: NetworkingError)
 }
 
 import Foundation
@@ -15,7 +15,7 @@ import Combine
 class HomePageViewModel {
     
     private var subscriptions = Set<AnyCancellable>()
-    weak var delegate: TransferData?
+    weak var delegate: HomePageViewModelDelegate?
     var popularMovieCategories = [MovieList]()
     var top_ratingMovieCategories = [MovieList]()
     lazy var airing_todayMovieCategories = [MovieList]()
@@ -27,7 +27,7 @@ class HomePageViewModel {
         NetworkManagerRepository.shared.networkRequest(from: .popular)
             .sink(receiveCompletion: { [unowned self] (completion) in
                 if case let .failure(error) = completion {
-                    print(error)
+                    self.delegate?.errorNotifier(error)
                 }
             }, receiveValue: { [unowned self] in self.popularMovieCategories = self.populateItemFromServer(with: $0)
             })
@@ -38,7 +38,7 @@ class HomePageViewModel {
         NetworkManagerRepository.shared.networkRequest(from: .top_rated)
             .sink(receiveCompletion: { [unowned self] (completion) in
                 if case let .failure(error) = completion {
-                    print(error)
+                    self.delegate?.errorNotifier(error)
                 }
             }, receiveValue: { [unowned self] in self.top_ratingMovieCategories = self.populateItemFromServer(with: $0)
             })
@@ -46,10 +46,10 @@ class HomePageViewModel {
     }
     
     func getAiring_todayMovieCategories() {
-        NetworkManagerRepository.shared.networkRequest(from: .top_rated)
+        NetworkManagerRepository.shared.networkRequest(from: .airing_today)
             .sink(receiveCompletion: { [unowned self] (completion) in
                 if case let .failure(error) = completion {
-                    print(error)
+                    self.delegate?.errorNotifier(error)
                 }
             }, receiveValue: { [unowned self] in self.airing_todayMovieCategories = self.populateItemFromServer(with: $0)
             })
@@ -60,7 +60,7 @@ class HomePageViewModel {
         NetworkManagerRepository.shared.networkRequest(from: .on_the_air)
             .sink(receiveCompletion: { [unowned self] (completion) in
                 if case let .failure(error) = completion {
-                    print(error)
+                    self.delegate?.errorNotifier(error)
                 }
             }, receiveValue: { [unowned self] in self.on_the_airMovieCategories = self.populateItemFromServer(with: $0)
             })
@@ -71,6 +71,11 @@ class HomePageViewModel {
         return movies
     }
     
-    
+    func getDataForAllHomePageEndpoint() {
+        getPopularMoviesCategories()
+        getTopRatingMovieCategories()
+        getAiring_todayMovieCategories()
+        geton_the_airMovieCategories()
+    }
     
 }

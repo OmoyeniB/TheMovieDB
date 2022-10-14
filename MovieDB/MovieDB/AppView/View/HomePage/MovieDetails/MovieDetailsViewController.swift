@@ -10,7 +10,7 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
     
     var id: Int = 0
-    var titles: String = ""
+    lazy var _titles: String = ""
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieDescription: UITextView!
     @IBOutlet weak var movieTitle: UILabel!
@@ -29,6 +29,8 @@ class MovieDetailsViewController: UIViewController {
         setNavBar()
         setNavbarOpacity()
         configureView()
+//        print(_titles)
+        movieTitle.text = _titles
     }
 
     @IBAction func clickToViewSeason(_ sender: Any) {

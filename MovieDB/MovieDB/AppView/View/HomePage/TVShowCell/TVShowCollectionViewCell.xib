@@ -45,30 +45,30 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srC-HD-a8b">
-                                <rect key="frame" x="8" y="246.33333333333334" width="163" height="0.0"/>
+                                <rect key="frame" x="8" y="246.33333333333334" width="163" height="10.333333333333343"/>
                                 <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="13"/>
                                 <color key="textColor" name="AlgaeGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7OQ-lM-aUg">
-                                <rect key="frame" x="8" y="254.33333333333334" width="163" height="13.666666666666657"/>
+                                <rect key="frame" x="8" y="261.66666666666669" width="163" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhM-Fp-Uhw">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="13.666666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="14"/>
                                         <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="10"/>
                                         <color key="textColor" name="AlgaeGreenColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVA-ML-KBg">
-                                        <rect key="frame" x="129.66666666666666" y="0.0" width="33.333333333333343" height="13.666666666666666"/>
-                                        <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="10"/>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVA-ML-KBg">
+                                        <rect key="frame" x="124.66666666666664" y="0.0" width="38.333333333333329" height="14"/>
+                                        <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="12"/>
                                         <color key="tintColor" name="AlgaeGreenColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                                         <state key="normal" title="10.0">
                                             <color key="titleColor" name="AlgaeGreenColor"/>
-                                            <imageReference key="image" image="star.fill" catalog="system" symbolScale="small"/>
+                                            <imageReference key="image" image="star.fill" catalog="system" symbolScale="medium"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="small">
-                                                <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="11"/>
                                             </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
@@ -87,8 +87,11 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z8B-Yy-OJ1">
-                                <rect key="frame" x="8" y="276" width="163" height="81"/>
-                                <color key="backgroundColor" name="DarkColor"/>
+                                <rect key="frame" x="8" y="285.66666666666669" width="163" height="79.333333333333314"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79.329999999999998" id="86U-qR-eMA"/>
+                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" name="WhiteColor"/>
                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
@@ -98,17 +101,17 @@
                         <color key="backgroundColor" name="DarkColor"/>
                         <constraints>
                             <constraint firstItem="vJ0-nS-jnf" firstAttribute="leading" secondItem="K2q-bH-yIR" secondAttribute="leading" id="2u8-zI-y3w"/>
-                            <constraint firstItem="z8B-Yy-OJ1" firstAttribute="top" secondItem="7OQ-lM-aUg" secondAttribute="bottom" constant="8" id="4WB-Xn-a1y"/>
+                            <constraint firstItem="z8B-Yy-OJ1" firstAttribute="top" secondItem="7OQ-lM-aUg" secondAttribute="bottom" constant="10" id="4WB-Xn-a1y"/>
                             <constraint firstItem="7OQ-lM-aUg" firstAttribute="leading" secondItem="K2q-bH-yIR" secondAttribute="leading" constant="8" id="5sy-Mm-Kz7"/>
                             <constraint firstAttribute="trailing" secondItem="vJ0-nS-jnf" secondAttribute="trailing" id="6M2-Vi-QaA"/>
-                            <constraint firstAttribute="bottom" secondItem="z8B-Yy-OJ1" secondAttribute="bottom" constant="8" id="8Rd-zS-u2w"/>
+                            <constraint firstAttribute="bottom" secondItem="z8B-Yy-OJ1" secondAttribute="bottom" id="8Rd-zS-u2w"/>
                             <constraint firstAttribute="trailing" secondItem="srC-HD-a8b" secondAttribute="trailing" constant="8" id="AJa-GU-z5q"/>
                             <constraint firstAttribute="trailing" secondItem="7OQ-lM-aUg" secondAttribute="trailing" constant="8" id="EWE-3Y-AGl"/>
                             <constraint firstAttribute="trailing" secondItem="z8B-Yy-OJ1" secondAttribute="trailing" constant="8" id="Kfd-RP-MMN"/>
                             <constraint firstItem="vJ0-nS-jnf" firstAttribute="top" secondItem="K2q-bH-yIR" secondAttribute="top" id="ba9-QD-Lcb"/>
                             <constraint firstItem="srC-HD-a8b" firstAttribute="leading" secondItem="K2q-bH-yIR" secondAttribute="leading" constant="8" id="rlS-5i-Tqn"/>
                             <constraint firstItem="srC-HD-a8b" firstAttribute="top" secondItem="vJ0-nS-jnf" secondAttribute="bottom" constant="15" id="rzj-gT-gp4"/>
-                            <constraint firstItem="7OQ-lM-aUg" firstAttribute="top" secondItem="srC-HD-a8b" secondAttribute="bottom" constant="8" id="seJ-T6-zMh"/>
+                            <constraint firstItem="7OQ-lM-aUg" firstAttribute="top" secondItem="srC-HD-a8b" secondAttribute="bottom" constant="5" id="seJ-T6-zMh"/>
                             <constraint firstItem="z8B-Yy-OJ1" firstAttribute="leading" secondItem="K2q-bH-yIR" secondAttribute="leading" constant="8" id="xdg-WU-c0G"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>

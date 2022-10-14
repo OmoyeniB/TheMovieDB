@@ -9,8 +9,8 @@ import UIKit
 
 class HomePageViewController: UIViewController {
     
-    lazy var twoDArray = [[MovieList]]()
-
+    lazy var id: Int = 0
+    lazy var movieTitle: String = ""
     lazy var popularMovieCategories = [MovieList]()
     lazy var top_ratingMovieCategories = [MovieList]()
     lazy var airing_todayMovieCategories = [MovieList]()
@@ -31,14 +31,14 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homePageViewModel.getPopularMoviesCategories()
-        homePageViewModel.getTopRatingMovieCategories()
-        homePageViewModel.getAiring_todayMovieCategories()
-        homePageViewModel.geton_the_airMovieCategories()
-        setUpNavigationBar()
-        twoDArray = [homePageViewModel.popularMovieCategories, homePageViewModel.top_ratingMovieCategories, homePageViewModel.airing_todayMovieCategories, homePageViewModel.on_the_airMovieCategories]
+        homePageViewModel.getDataForAllHomePageEndpoint()
         setDelegate()
-        print(twoDArray)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        segmentedControl.adjustFont()
+        setUpNavigationBar()
     }
     
     @IBAction func segmentedControlValueDidChange(_ sender: Any) {
@@ -78,7 +78,13 @@ class HomePageViewController: UIViewController {
 }
 
 extension HomePageViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = MovieDetailsViewController()
+        setUpCellWithSegmentedControlSelectedIndex(cell: nil, indexPath: indexPath)
+        detailViewController.id = self.id
+        detailViewController._titles = self.movieTitle 
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 extension HomePageViewController: UICollectionViewDataSource {
@@ -102,19 +108,32 @@ extension HomePageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(TVShowCollectionViewCell.self, for: indexPath)
+            setUpCellWithSegmentedControlSelectedIndex(cell: cell, indexPath: indexPath)
+        return cell
+    }
+    
+    func setUpCellWithSegmentedControlSelectedIndex(cell: TVShowCollectionViewCell?, indexPath: IndexPath) {
+        
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            cell.setUpCell(with: homePageViewModel.popularMovieCategories[indexPath.item])
+            cell?.setUpCell(with: homePageViewModel.popularMovieCategories[indexPath.item])
+            self.id = homePageViewModel.popularMovieCategories[indexPath.item].id ?? 0
+            self.movieTitle = homePageViewModel.popularMovieCategories[indexPath.item].title ?? ""
         case 1:
-            cell.setUpCell(with: homePageViewModel.top_ratingMovieCategories[indexPath.item])
+            cell?.setUpCell(with: homePageViewModel.top_ratingMovieCategories[indexPath.item])
+            self.id = homePageViewModel.top_ratingMovieCategories[indexPath.item].id ?? 0
+            self.movieTitle = homePageViewModel.top_ratingMovieCategories[indexPath.item].title ?? ""
         case 2:
-            cell.setUpCell(with: homePageViewModel.airing_todayMovieCategories[indexPath.item])
+            cell?.setUpCell(with: homePageViewModel.airing_todayMovieCategories[indexPath.item])
+            self.id = homePageViewModel.airing_todayMovieCategories[indexPath.item].id ?? 0
+            self.movieTitle = homePageViewModel.airing_todayMovieCategories[indexPath.item].name ?? ""
         case 3:
-            cell.setUpCell(with: homePageViewModel.on_the_airMovieCategories[indexPath.item])
+            cell?.setUpCell(with: homePageViewModel.on_the_airMovieCategories[indexPath.item])
+            self.id = homePageViewModel.on_the_airMovieCategories[indexPath.item].id ?? 0
+            self.movieTitle = homePageViewModel.on_the_airMovieCategories[indexPath.item].name ?? ""
         default:
             break
         }
-        return cell
     }
     
 }
@@ -128,7 +147,7 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
         let padding: CGFloat =  20
         let collectionViewSize = collectionView.frame.size.width - padding
         
-        return CGSize(width: collectionViewSize/2, height: collectionView.frame.size.height / 2)
+        return CGSize(width: collectionViewSize/2, height: collectionView.frame.size.height / 1.7)
     }
     
     public func collectionView(_ collectionView: UICollectionView,
