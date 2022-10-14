@@ -6,8 +6,22 @@
 //
 
 import UIKit
+import SDWebImage
 
 extension UIView {
+    
+    func downloadImage(with url: URL, images: UIImageView){
+        images.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        images.sd_setImage(with: url) { (image, error, cache, urls) in
+                    if (error != nil) {
+                        images.image = UIImage(named: "placeholderr")
+                    } else {
+                        DispatchQueue.main.async {
+                            images.image = image
+                        }
+                    }
+        }
+    }
     
     func setTopCornerRadius() {
         self.clipsToBounds = true
@@ -31,5 +45,6 @@ extension UIView {
     
     
 }
+
 
 
