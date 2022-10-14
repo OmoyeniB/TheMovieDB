@@ -35,5 +35,14 @@ enum Constants {
         static let apiKey = "b9fd3c0c458976b0ccced6820b43e561"
         static let baseURL = "https://api.themoviedb.org/3"
     }
+    
+    enum PopUpAlertString {
+        static let popUpTitle = "Alert"
+        static let popUpActionTitles = "OK"
+        static let networkOutOfCoverage = "Oops!.. something went wrong. Please check your connection and try again"
+        static let popUpAlertTitle = "Reset Timer?"
+        static let popUpAlertActionTitle = "Yes"
+        
+    }
 }
 
