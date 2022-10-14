@@ -62,6 +62,7 @@ class HomePageViewController: UIViewController {
     
     func setDelegate() {
         homePageCollectionView.delegate = self
+        homePageCollectionView.dataSource = self
         homePageCollectionView.registerNib(TVShowCollectionViewCell.self)
     }
     
@@ -77,6 +78,44 @@ class HomePageViewController: UIViewController {
 }
 
 extension HomePageViewController: UICollectionViewDelegate {
+    
+}
+
+extension HomePageViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+          return  homePageViewModel.popularMovieCategories.count
+        case 1:
+            return homePageViewModel.top_ratingMovieCategories.count
+        case 2:
+            return homePageViewModel.airing_todayMovieCategories.count
+        case 3:
+            return homePageViewModel.on_the_airMovieCategories.count
+        default:
+            return 0
+        }
+    
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(TVShowCollectionViewCell.self, for: indexPath)
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            cell.setUpCell(with: homePageViewModel.popularMovieCategories[indexPath.item])
+        case 1:
+            cell.setUpCell(with: homePageViewModel.top_ratingMovieCategories[indexPath.item])
+        case 2:
+            cell.setUpCell(with: homePageViewModel.airing_todayMovieCategories[indexPath.item])
+        case 3:
+            cell.setUpCell(with: homePageViewModel.on_the_airMovieCategories[indexPath.item])
+        default:
+            break
+        }
+        return cell
+    }
     
 }
 
