@@ -17,7 +17,7 @@ final class MovieDetailsViewModel {
    
    
     func getMovieDetailsByID() {
-        NetworkManagerRepository.shared.getTotalSeason(from: .tv_series_season, id: movieId)
+        NetworkManagerRepository.shared.getMovieByCategorieEndpoints(from: .tv_series_season, id: movieId, seasonNumber: nil, expecting: MovieSeason.self)
             .sink(receiveCompletion: { [weak self] (completion) in
                 if case let .failure(error) = completion {
                     self?.delegate?.errorNotifier(error)
