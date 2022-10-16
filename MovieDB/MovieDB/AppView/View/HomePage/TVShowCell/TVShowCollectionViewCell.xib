@@ -42,6 +42,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srC-HD-a8b">
@@ -49,6 +50,9 @@
                                 <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="13"/>
                                 <color key="textColor" name="AlgaeGreenColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7OQ-lM-aUg">
                                 <rect key="frame" x="8" y="261.66666666666669" width="163" height="14"/>
@@ -85,6 +89,9 @@
                                     <constraint firstItem="fhM-Fp-Uhw" firstAttribute="top" secondItem="7OQ-lM-aUg" secondAttribute="top" id="nYR-09-1rD"/>
                                     <constraint firstAttribute="bottom" secondItem="fhM-Fp-Uhw" secondAttribute="bottom" id="uo6-ue-0h6"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z8B-Yy-OJ1">
                                 <rect key="frame" x="8" y="285.66666666666669" width="163" height="79.333333333333314"/>
@@ -96,6 +103,9 @@
                                 <color key="textColor" name="WhiteColor"/>
                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" name="DarkColor"/>
@@ -118,6 +128,7 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="20"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
@@ -130,6 +141,9 @@
                 <constraint firstItem="K2q-bH-yIR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wTJ-HE-GSQ"/>
             </constraints>
             <size key="customSize" width="179" height="365"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="movieDetails" destination="z8B-Yy-OJ1" id="gTz-1J-trF"/>
                 <outlet property="movieImage" destination="vJ0-nS-jnf" id="xpn-yl-t4q"/>

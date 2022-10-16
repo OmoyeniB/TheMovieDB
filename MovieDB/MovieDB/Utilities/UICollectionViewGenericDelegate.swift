@@ -69,3 +69,38 @@ extension UICollectionView {
                                                 for: indexPath) as? T
     }
 }
+
+extension UITableView {
+    func register<T: UITableViewCell>(_ : T.Type, forNib: Bool)  {
+        guard forNib else {
+            register(T.self, forCellReuseIdentifier: T.identifier)
+            return
+        }
+        
+        let nib = UINib(nibName: T.nibName, bundle: nil)
+        register(nib, forCellReuseIdentifier: T.identifier)
+    }
+    
+    
+    
+    func registerHeaderFooterView<T: UITableViewHeaderFooterView>(_ : T.Type, forNib: Bool) {
+        guard forNib else {
+            register(T.self, forHeaderFooterViewReuseIdentifier: T.identifier)
+            return
+        }
+        
+        let reuseIdentifier = T.identifier
+        let nib = UINib(nibName: T.nibName, bundle: nil)
+        register(nib, forHeaderFooterViewReuseIdentifier: reuseIdentifier)
+    }
+    
+    
+    
+    func dequeueHeaderFooterView<T: UITableViewHeaderFooterView>(_ : T.Type) -> T? {
+        return dequeueReusableHeaderFooterView(withIdentifier: T.identifier) as? T
+    }
+    
+    func dequeueReuseableCell<T: UITableViewCell>(_ :T.Type, at indexPath: IndexPath) -> T? {
+        return dequeueReusableCell(withIdentifier: T.identifier, for: indexPath) as? T
+    }
+}

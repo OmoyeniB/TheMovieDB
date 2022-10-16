@@ -7,22 +7,11 @@
 
 import Foundation
 
-enum NetworkingError: LocalizedError {
-    case errorDecoding(DecodingError)
+enum NetworkingError: Error {
+    case errorDecoding
     case unknownError
-    case invalid_Url(URLError)
+    case invalid_Url
     case serverResponse(Int)
     
-    var errorDescription: String? {
-        switch self {
-        case .errorDecoding:
-            return "Response could not be decoded"
-        case .unknownError:
-            return "Unknown error"
-        case .invalid_Url:
-            return "Please provide a valid URL"
-        case .serverResponse(let error):
-            return "\(error)"
-        }
-    }
+ 
 }

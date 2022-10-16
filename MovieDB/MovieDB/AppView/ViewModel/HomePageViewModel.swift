@@ -5,8 +5,9 @@
 //  Created by Sharon Omoyeni Babatunde on 13/10/2022.
 //
 
-protocol HomePageViewModelDelegate: AnyObject {
-    func errorNotifier(_ error: NetworkingError)
+protocol FetchedDataModelDelegate: AnyObject {
+    func errorNotifier(_ error: Error)
+    func configureUIAfterNetworkCall()
 }
 
 import Foundation
@@ -15,7 +16,7 @@ import Combine
 class HomePageViewModel {
     
     private var subscriptions = Set<AnyCancellable>()
-    weak var delegate: HomePageViewModelDelegate?
+    weak var delegate: FetchedDataModelDelegate?
     var popularMovieCategories = [MovieList]()
     var top_ratingMovieCategories = [MovieList]()
     lazy var airing_todayMovieCategories = [MovieList]()
@@ -29,7 +30,8 @@ class HomePageViewModel {
                 if case let .failure(error) = completion {
                     self.delegate?.errorNotifier(error)
                 }
-            }, receiveValue: { [unowned self] in self.popularMovieCategories = self.populateItemFromServer(with: $0)
+            }, receiveValue: { [unowned self] in self.popularMovieCategories = CombineDataHandler.populateItemFromServer(with: $0)
+                getTopRatingMovieCategories()
             })
             .store(in: &self.subscriptions)
     }
@@ -40,7 +42,8 @@ class HomePageViewModel {
                 if case let .failure(error) = completion {
                     self.delegate?.errorNotifier(error)
                 }
-            }, receiveValue: { [unowned self] in self.top_ratingMovieCategories = self.populateItemFromServer(with: $0)
+            }, receiveValue: { [unowned self] in self.top_ratingMovieCategories = CombineDataHandler.populateItemFromServer(with: $0)
+                getAiring_todayMovieCategories()
             })
             .store(in: &self.subscriptions)
     }
@@ -51,7 +54,8 @@ class HomePageViewModel {
                 if case let .failure(error) = completion {
                     self.delegate?.errorNotifier(error)
                 }
-            }, receiveValue: { [unowned self] in self.airing_todayMovieCategories = self.populateItemFromServer(with: $0)
+            }, receiveValue: { [unowned self] in self.airing_todayMovieCategories = CombineDataHandler.populateItemFromServer(with: $0)
+                geton_the_airMovieCategories()
             })
             .store(in: &self.subscriptions)
     }
@@ -62,20 +66,14 @@ class HomePageViewModel {
                 if case let .failure(error) = completion {
                     self.delegate?.errorNotifier(error)
                 }
-            }, receiveValue: { [unowned self] in self.on_the_airMovieCategories = self.populateItemFromServer(with: $0)
+            }, receiveValue: { [unowned self] in self.on_the_airMovieCategories = CombineDataHandler.populateItemFromServer(with: $0)
+                delegate?.configureUIAfterNetworkCall()
             })
             .store(in: &self.subscriptions)
+        
     }
     
-    private func populateItemFromServer(with movies: [MovieList]) -> [MovieList] {
-        return movies
-    }
-    
-    func getDataForAllHomePageEndpoint() {
-        getPopularMoviesCategories()
-        getTopRatingMovieCategories()
-        getAiring_todayMovieCategories()
-        geton_the_airMovieCategories()
-    }
-    
+   
+  
 }
+

@@ -6,19 +6,19 @@
 //
 
 import UIKit
+import Combine
+import SkeletonView
 
 class HomePageViewController: UIViewController {
     
     lazy var id: Int = 0
     lazy var movieTitle: String = ""
-    lazy var popularMovieCategories = [MovieList]()
-    lazy var top_ratingMovieCategories = [MovieList]()
-    lazy var airing_todayMovieCategories = [MovieList]()
-    lazy var on_the_airMovieCategories = [MovieList]()
-    lazy var allMovieCategoryList = [[MovieList]]()
+    var movieList: MovieList?
+    weak var delegate: FetchedDataModelDelegate?
     let homePageViewModel = HomePageViewModel()
     
     @IBOutlet weak var homePageCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     lazy var listButton: UIButton = {
@@ -31,7 +31,10 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homePageViewModel.getDataForAllHomePageEndpoint()
+        homePageCollectionView.isSkeletonable = true
+        homePageCollectionView.showSkeleton(usingColor: .wetAsphalt, transition: .crossDissolve(0.25))
+        homePageViewModel.delegate = self
+        homePageViewModel.getPopularMoviesCategories()
         setDelegate()
     }
     
@@ -81,13 +84,17 @@ extension HomePageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = MovieDetailsViewController()
         setUpCellWithSegmentedControlSelectedIndex(cell: nil, indexPath: indexPath)
-        detailViewController.id = self.id
-        detailViewController._titles = self.movieTitle 
+        detailViewController.movieList = self.movieList
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
-extension HomePageViewController: UICollectionViewDataSource {
+extension HomePageViewController: SkeletonCollectionViewDataSource {
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> SkeletonView.ReusableCellIdentifier {
+        return TVShowCollectionViewCell.identifier
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
@@ -117,20 +124,16 @@ extension HomePageViewController: UICollectionViewDataSource {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             cell?.setUpCell(with: homePageViewModel.popularMovieCategories[indexPath.item])
-            self.id = homePageViewModel.popularMovieCategories[indexPath.item].id ?? 0
-            self.movieTitle = homePageViewModel.popularMovieCategories[indexPath.item].title ?? ""
+            self.movieList = homePageViewModel.popularMovieCategories[indexPath.item]
         case 1:
             cell?.setUpCell(with: homePageViewModel.top_ratingMovieCategories[indexPath.item])
-            self.id = homePageViewModel.top_ratingMovieCategories[indexPath.item].id ?? 0
-            self.movieTitle = homePageViewModel.top_ratingMovieCategories[indexPath.item].title ?? ""
+            self.movieList = homePageViewModel.top_ratingMovieCategories[indexPath.item]
         case 2:
             cell?.setUpCell(with: homePageViewModel.airing_todayMovieCategories[indexPath.item])
-            self.id = homePageViewModel.airing_todayMovieCategories[indexPath.item].id ?? 0
-            self.movieTitle = homePageViewModel.airing_todayMovieCategories[indexPath.item].name ?? ""
+            self.movieList = homePageViewModel.airing_todayMovieCategories[indexPath.item]
         case 3:
             cell?.setUpCell(with: homePageViewModel.on_the_airMovieCategories[indexPath.item])
-            self.id = homePageViewModel.on_the_airMovieCategories[indexPath.item].id ?? 0
-            self.movieTitle = homePageViewModel.on_the_airMovieCategories[indexPath.item].name ?? ""
+            self.movieList = homePageViewModel.on_the_airMovieCategories[indexPath.item]
         default:
             break
         }
@@ -168,4 +171,19 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-
+extension HomePageViewController: FetchedDataModelDelegate {
+    
+    func errorNotifier(_ error: Error) {
+        displayError(error: error.localizedDescription)
+    }
+    
+    func configureUIAfterNetworkCall() {
+        DispatchQueue.main.async { [weak self] in
+            self?.homePageCollectionView.stopSkeletonAnimation()
+            self?.homePageCollectionView.hideSkeleton()
+            self?.homePageCollectionView.reloadData()
+        }
+    }
+    
+    
+}

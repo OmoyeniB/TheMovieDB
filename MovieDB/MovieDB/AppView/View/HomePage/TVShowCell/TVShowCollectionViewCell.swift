@@ -31,8 +31,9 @@ class TVShowCollectionViewCell: UICollectionViewCell {
     
     func setUpCell(with movieData: MovieList) {
         self.downloadImage(with: movieData.imageURL, images: movieImage)
-        provideDefaultText(dataToModify: movieData)
-        date(dataToModify: movieData)
+        movieTitle.text = movieData.name
+        movieDetails.text = movieData.overview
+        releasedDate.text = movieData.first_air_date
         movieRatings.setTitle(String(movieData.voteAverage ?? 0.0), for: .normal)
     }
     
@@ -40,28 +41,7 @@ class TVShowCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func provideDefaultText(dataToModify: MovieList) {
-        movieTitle.text = dataToModify.title
-        movieDetails.text = dataToModify.overview
-        
-        if dataToModify.name != nil {
-            movieTitle.text = dataToModify.name
-        }
-        
-        else if  movieDetails.text == "" {
-            movieDetails.text = "Opps No detail provided"
-        }
-    }
-    
-    func date(dataToModify: MovieList) {
-       
-        if dataToModify.releaseDate != nil && dataToModify.first_air_date == nil {
-            releasedDate.text = dataToModify.first_air_date
-        }
-//      else if dataToModify.first_air_date != nil {
-            releasedDate.text = dataToModify.first_air_date
-//        }
-    }
+   
 }
 
 
