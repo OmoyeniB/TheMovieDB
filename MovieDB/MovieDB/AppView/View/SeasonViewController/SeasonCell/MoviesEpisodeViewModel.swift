@@ -17,7 +17,7 @@ final class MoviesEpisodeViewModel {
     var episodes = [Episode]()
 
     func getSeriesEpisodeById_SeasonNumber() {
-        NetworkManagerRepository.shared.getSeriesEpisode(from: .tv_series_episode, id: movieId, seasonNumber: seasonNumber)
+        NetworkManagerRepository.shared.getMovieByCategorieEndpoints(from: .tv_series_episode, id: movieId, seasonNumber: seasonNumber, expecting: MovieEpisodeModel.self)
             .sink(receiveCompletion: { [weak self] (completion) in
                 if case let .failure(error) = completion {
                     self?.delegate?.errorNotifier(error)
