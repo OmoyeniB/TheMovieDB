@@ -10,9 +10,6 @@ import Combine
 
 final class NetworkManagerRepository: MovieService {
     
-    //    func networkRequest<T>(from endpoint: ApiEndPointHandler) -> Future<[T], NetworkingError> {
-    //        <#code#>
-    //    }
     public static let shared = NetworkManagerRepository()
     private init () {}
     private let apiKey = Constants.ApiParameter.apiKey
@@ -29,62 +26,9 @@ final class NetworkManagerRepository: MovieService {
         return jsonDecoder
     }()
     
-    func networkRequest(from endpoint: ApiEndPointHandler) -> Future<[MovieList], Error> {
-        return Future<[MovieList], Error> { promise in
-            guard let url = self.getUrlByEndPoint(with: endpoint, id: nil, seasonNumber: nil) else {
-                return promise(.failure(NetworkingError.invalid_Url))
-            }
-            
-            self.urlSession.dataTaskPublisher(for: url)
-                .tryMap { (data, response) -> Data in
-                    guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
-                        throw NetworkingError.serverResponse((response as? HTTPURLResponse)?.statusCode ?? 500)
-                    }
-                    return data
-                }
-                .decode(type: MovieData.self, decoder: self.jsonDecoder)
-                .receive(on: RunLoop.main)
-                .sink(receiveCompletion: { (completion) in
-                    if case let .failure(error) = completion {
-                        promise(.failure(error))
-                    }
-                }, receiveValue: { promise(.success($0.results)) })
-                .store(in: &self.subscriptions)
-        }
-    }
     
-    
-    
-    func getTotalSeason(from endpoint: ApiEndPointHandler, id: Int) -> Future<MovieSeason, Error> {
-        return Future<MovieSeason, Error> { promise in
-            guard let url = self.getUrlByEndPoint(with: endpoint, id: id, seasonNumber: nil) else {
-                return promise(.failure(NetworkingError.invalid_Url))
-            }
-            
-            self.urlSession.dataTaskPublisher(for: url)
-                .tryMap { (data, response) -> Data in
-                    guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
-                        throw NetworkingError.serverResponse((response as? HTTPURLResponse)?.statusCode ?? 500)
-                    }
-                    return data
-                }
-                .decode(type: MovieSeason.self, decoder: self.jsonDecoder)
-                .receive(on: RunLoop.main)
-                .sink(receiveCompletion: { (completion) in
-                    if case let .failure(error) = completion {
-                        promise(.failure(error))
-                        print(error, ":ERROR Occured")
-                    }
-                }, receiveValue: { promise(.success($0))
-//                    print("Susccessfully:", $0)
-                })
-                .store(in: &self.subscriptions)
-        }
-    }
-    
-    func getSeriesEpisode(from endpoint: ApiEndPointHandler, id: Int, seasonNumber: Int) -> Future<MovieEpisodeModel, Error> {
-        
-        return Future<MovieEpisodeModel, Error> { promise in
+    func getMovieByCategorieEndpoints<T: Codable>(from endpoint: ApiEndPointHandler, id: Int?, seasonNumber: Int?, expecting: T.Type) -> Future<T, Error> {
+        return Future<T, Error> { promise in
             guard let url = self.getUrlByEndPoint(with: endpoint, id: id, seasonNumber: seasonNumber) else {
                 return promise(.failure(NetworkingError.invalid_Url))
             }
@@ -96,21 +40,16 @@ final class NetworkManagerRepository: MovieService {
                     }
                     return data
                 }
-                .decode(type: MovieEpisodeModel.self, decoder: self.jsonDecoder)
+                .decode(type: T.self, decoder: self.jsonDecoder)
                 .receive(on: RunLoop.main)
                 .sink(receiveCompletion: { (completion) in
                     if case let .failure(error) = completion {
                         promise(.failure(error))
-                        print(error, ":ERROR Occured")
                     }
-                }, receiveValue: { promise(.success($0))
-//                    print("Susccessfully:", $0)
-                })
+                }, receiveValue: { promise(.success($0)) })
                 .store(in: &self.subscriptions)
         }
     }
-    
-    
     
     func getUrlByEndPoint(with endpoint: ApiEndPointHandler, id: Int?, seasonNumber: Int?) -> URL? {
         if endpoint == .tv_series_season {
