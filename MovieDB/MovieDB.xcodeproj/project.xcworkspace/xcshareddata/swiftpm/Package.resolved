@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "fittedsheets",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gordontucker/FittedSheets",
+      "state" : {
+        "revision" : "65f9c93718f96c6de234d38c9976e67a0d9e2b28",
+        "version" : "2.4.2"
+      }
+    },
+    {
       "identity" : "iqkeyboardmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hackiftekhar/IQKeyboardManager",
