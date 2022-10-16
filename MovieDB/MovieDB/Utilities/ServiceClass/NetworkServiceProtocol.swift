@@ -10,9 +10,7 @@ import Combine
 
 protocol MovieService {
     
-    func networkRequest(from endpoint: ApiEndPointHandler) -> Future<[MovieList], Error>
-    
-    //    func networkRequest<T>(from endpoint: ApiEndPointHandler) -> Future<[T], NetworkingError>
-    
-//    func queryUrlComponents(urlComponents: URLComponents) -> URL?
+    func getMovieByCategorieEndpoints<T: Codable>(from endpoint: ApiEndPointHandler, id: Int?, seasonNumber: Int?, expecting: T.Type) -> Future<T, Error>
+    func getUrlByEndPoint(with endpoint: ApiEndPointHandler, id: Int?, seasonNumber: Int?) -> URL?
+    func queryUrlComponents(urlComponents: URLComponents) -> URL?
 }
