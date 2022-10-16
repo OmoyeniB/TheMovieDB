@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import SkeletonView
+import FittedSheets
 
 class HomePageViewController: UIViewController {
     
@@ -26,6 +27,7 @@ class HomePageViewController: UIViewController {
         listButton.setImage(UIImage(systemName: Constants.Images.homePageNavigationImage), for: .normal)
         listButton.tintColor = Constants.Colors.whiteColor
         listButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        listButton.addTarget(self, action: #selector(displayProfilePage), for: .touchUpInside)
         return listButton
     }()
     
@@ -63,6 +65,17 @@ class HomePageViewController: UIViewController {
         }
     }
     
+    @objc func displayProfilePage() {
+        view.layoutIfNeeded()
+        let vc = BottomSheetViewControllerViewController()
+        let sheetController = SheetViewController(controller: vc, sizes: [.percent(0.42)])
+        sheetController.hasBlurBackground = false
+        sheetController.gripColor = .clear
+        sheetController.gripSize = CGSize(width: 50, height: 3)
+        navigationController?.present(sheetController, animated: false)
+
+    }
+    
     func setDelegate() {
         homePageCollectionView.delegate = self
         homePageCollectionView.dataSource = self
@@ -78,10 +91,13 @@ class HomePageViewController: UIViewController {
     }
     
     
+    
+    
 }
 
 extension HomePageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let detailViewController = MovieDetailsViewController()
         setUpCellWithSegmentedControlSelectedIndex(cell: nil, indexPath: indexPath)
         detailViewController.movieList = self.movieList
@@ -187,3 +203,4 @@ extension HomePageViewController: FetchedDataModelDelegate {
     
     
 }
+
