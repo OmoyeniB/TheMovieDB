@@ -19,6 +19,8 @@ enum Constants {
         static let lightGreyColor = UIColor(named: "LightGreyColor")
         static let slateGreyColor = UIColor(named: "SlateGreyColor")
         static let whiteColor = UIColor(named: "WhiteColor")
+        static let deepskyblueColor = UIColor(named: "DeepskyblueColor")
+        static let coralColor = UIColor(named: "CoralColor")
     }
     
     enum Images {
