@@ -36,6 +36,7 @@ class MovieSeasonViewController: UIViewController {
         movieSeasonTableView.register(MovieSeasonTableViewCell.self, forNib: true)
         movieSeasonTableView.rowHeight = 160
         movieSeasonTableView.registerHeaderFooterView(TableViewSectionHeader.self, forNib: false)
+        trimTableviewHeader(movieSeasonTableView)
     }
     
 }
