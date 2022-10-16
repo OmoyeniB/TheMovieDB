@@ -17,6 +17,12 @@ extension UIViewController {
         label.textColor = Constants.Colors.whiteColor
         return label.text ?? ""
     }
+    
+    func trimTableviewHeader(_ tableView: UITableView) {
+        var frame = CGRect.zero
+        frame.size.height = .leastNormalMagnitude
+        tableView.tableHeaderView = UIView(frame: frame)
+    }
 
     func setUpNavigationButton(imageName: String) -> String {
         let image = UIImageView()
