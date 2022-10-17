@@ -21,4 +21,9 @@ struct Episode: Codable {
     let episodeNumber, id: Int?
     let name: String?
     let stillPath: String?
+    
+    var imageURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/w500\(stillPath ?? "")")!
+    }
+
 }
