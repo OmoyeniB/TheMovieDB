@@ -9,13 +9,24 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
     
+    var alreadyContained = false
+    let persistence = MovieDBersistenceStore()
+    var isliked = false
     var totalNumberOfTvSeriesSeason: Int = 0
     var movieList: MovieList?
     var creator: [String] = [String]()
     var episode = [Episode]()
     let movieDetailsViewModel = MovieDetailsViewModel()
+    var favoritedItem = [RealmFavoritedModelObjects]() {
+        didSet {
+            
+        }
+    }
+    var mockTrial = [Int]()
+    var persistedData = [RealmFavoritedModelObjects]()
+    var copyOfFavoriteItem: RealmFavoritedModelObjects?
+    var movieCast = [Cast]()
     var id: Int = 0
-    //    var seasonNumber: Int = 1
     lazy var _titles: String = ""
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieDescription: UITextView!
@@ -24,6 +35,8 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var movieCreator: UILabel!
     @IBOutlet weak var mostRecentSeason: UILabel!
     @IBOutlet weak var seasonImage: UIImageView!
+    @IBOutlet weak var movieCastCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var averageMovieRating: UILabel!
     
     override func viewDidLoad() {
@@ -31,15 +44,20 @@ class MovieDetailsViewController: UIViewController {
         unwrapDataNeededToDisPlayData()
         movieDetailsViewModel.movieId = self.id
         movieDetailsViewModel.getMovieDetailsByID()
-        movieDetailsViewModel.delegate = self
-        movieTitle.text = _titles
+        configureView()
+        self.favoritedItem = FetchFavoritedDataFromRealm().data
+        self.persistedData = FetchFavoritedDataFromRealm().data
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavBar()
         setNavbarOpacity()
-        configureView()
+    }
+    
+    func configureCollectionView() {
+        movieCastCollectionView.register(MovieCastCollectionViewCell.self, forCellWithReuseIdentifier: MovieCastCollectionViewCell.identifier)
+        //        movieCastCollectionView.registerNib(MovieCastCollectionViewCell.self)
     }
     
     func unwrapDataNeededToDisPlayData() {
@@ -70,7 +88,7 @@ class MovieDetailsViewController: UIViewController {
                 self.creator.append(creators.name)
             }
             let nameString = self.creator.joined(separator: ", ")
-            movieCreator.text = nameString
+            movieCreator.text = "Created by \(nameString)"
         } else {
             
         }
@@ -82,46 +100,147 @@ class MovieDetailsViewController: UIViewController {
         seasonViewController.navigationController?.modalTransitionStyle = .crossDissolve
         seasonViewController.seasonNumber = self.totalNumberOfTvSeriesSeason
         seasonViewController.movieID = self.id
-//        seasonViewController.episode = self.episode
         navigationController?.present(seasonViewController, animated: true)
     }
     
-    @IBAction func clickToFavorite(_ sender: Any) {
+    // moviList
+    /*
+     if favoritedItem .contains movilist.item ... remove it
+     */
+    
+    func addToFavorite(sender: UIButton) {
+        
+        if mockTrial.contains(where: {$0 == movieList?.id}) {
+            self.mockTrial.removeAll(where: { $0 == movieList?.id})
+            sender.tintColor = .gray
+            print("remove")
+        } else {
+            mockTrial.append(movieList?.id ?? 0)
+            print("added")
+            sender.tintColor = .red
+        }
+        
+        copyOfFavoriteItem = saveItemToRealm()
+//        if favoritedItem.contains(where: { $0.isLiked == copyOfFavoriteItem?.isLiked }) {
+//            RealmPersistenceHandler.addToIsFavorite(favoritedState: saveItemToRealm())
+//            print("remove")
+//        } else {
+////            copyOfFavoriteItem = saveItemToRealm()
+//            RealmPersistenceHandler.addToIsFavorite(favoritedState: saveItemToRealm())
+//            print("added")
+//        }
+//
+//        self.persistedData = FetchFavoritedDataFromRealm().data
+    }
+    
+    func saveItemToRealm() -> RealmFavoritedModelObjects {
+        if let movieList = movieList {
+            let modelToRealmObject = RealmFavoritedModelObjects()
+            modelToRealmObject.id = movieList.id ?? 0
+            modelToRealmObject.image = movieList.posterPath ?? ""
+            modelToRealmObject.averageRatings = movieList.voteAverage ?? 0.0
+            modelToRealmObject.date_Aired = movieList.releaseDate ?? ""
+//            modelToRealmObject.isLiked = false
+            persistence.save(items: modelToRealmObject)
+            return modelToRealmObject
+        }
+       return RealmFavoritedModelObjects()
+    }
+    
+    @IBAction func clickToFavorite(_ sender: UIButton) {
+        addToFavorite(sender: sender)
     }
     
     func configureView() {
+        activityIndicator.startAnimating()
+        movieDetailsViewModel.delegate = self
+        configureCollectionView()
         movieDescription.isEditable = false
         movieDescription.isScrollEnabled = true
-    }
-    
-    func loadViewWithDataFromEndpoint() {
         
     }
     
     func setNavBar() {
         let backButton = UIBarButtonItem()
+        backButton.tintColor = .white
+        //        backButton.setTit
         backButton.title = "Back"
-        let textAttributes = [NSAttributedString.Key.foregroundColor:Constants.Colors.whiteColor ?? .white]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
     }
+}
+
+extension MovieDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(movieDetailsViewModel.movieCast.count, "Yaaaaahhhh")
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCastCollectionViewCell.identifier, for: indexPath) as? MovieCastCollectionViewCell? {
+            //                cell?.actorName.text = self.movieDetailsViewModel.movieCast[indexPath.item].name
+            
+            return cell ?? UICollectionViewCell()
+        }
+        //        cell.textLabel?.text = movieDetailsViewModel.movieCast[indexPath.item].name
+        //        cell?.setUpCellWith(movieDetailsViewModel.movieCast[indexPath.item])
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let padding: CGFloat =  20
+        let collectionViewSize = collectionView.frame.size.width - padding
+        
+        return CGSize(width: collectionViewSize/2, height: collectionView.frame.size.height / 1.7)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(
+            top: 5, left: 5, bottom: 5, right: 5
+        )
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
 }
 
 
 extension MovieDetailsViewController: FetchedDataModelDelegate {
+    
+    func getCalledWhenSeasonApiHasBeenCompleted(seasonNumber: Int) {
+        movieDetailsViewModel.getSeriesEpisodeById_SeasonNumber()
+        movieCast = movieDetailsViewModel.movieCast
+        movieCastCollectionView.delegate = self
+        movieCastCollectionView.dataSource = self
+    }
+    
     
     func errorNotifier(_ error: Error) {
         displayError(error: error.localizedDescription)
     }
     
     func configureUIAfterNetworkCall() {
-//        print(movieDetailsViewModel.movieDetailsData, "*****")
         populateDetailsViewWithDataFromDetailsViewModel(model: movieDetailsViewModel.movieDetailsData)
-        
-        /*
-         do something after network call is made
-         */
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        movieCastCollectionView.reloadData()
+        //        DispatchQueue.main.async {
+        //            self.movieCastCollectionView.reloadData()
+        //        }
     }
     
     
 }
+
