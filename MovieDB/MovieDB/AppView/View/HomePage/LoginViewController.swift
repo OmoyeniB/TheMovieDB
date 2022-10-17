@@ -30,9 +30,9 @@ class LoginViewController: UIViewController {
         DispatchQueue.main.async {
             if UIScreen.main.bounds.height >= 720 {
                 self.view.layoutIfNeeded()
-                self.adjustConstraintsIfNeeded.constant = 82
+//                self.adjustConstraintsIfNeeded.constant = 82
             } else {
-                self.adjustConstraintsIfNeeded.constant = 19
+//                self.adjustConstraintsIfNeeded.constant = 19
             }
         }
     }

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePageViewController" customModule="MovieDB" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="fd1-06-kba" id="fbS-Ku-VEh"/>
                 <outlet property="homePageCollectionView" destination="ghE-Pu-cG4" id="pP3-ee-Dl0"/>
                 <outlet property="segmentedControl" destination="7fM-HF-I3S" id="dQT-n8-cAf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -41,6 +42,7 @@
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ghE-Pu-cG4">
                             <rect key="frame" x="9" y="65" width="372" height="723"/>
                             <color key="backgroundColor" name="AlmostBlackColor"/>
+                            <color key="tintColor" name="BattleshipGreyColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GTv-dp-NgI">
                                 <size key="itemSize" width="128" height="128"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -48,6 +50,9 @@
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
                         </collectionView>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="fd1-06-kba">
+                            <rect key="frame" x="176.66666666666666" y="375.66666666666669" width="37" height="37"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" name="AlmostBlackColor"/>
                     <constraints>
@@ -58,6 +63,8 @@
                         <constraint firstItem="ghE-Pu-cG4" firstAttribute="top" secondItem="7fM-HF-I3S" secondAttribute="bottom" constant="14" id="QiB-ma-N8S"/>
                         <constraint firstAttribute="trailing" secondItem="ghE-Pu-cG4" secondAttribute="trailing" constant="9" id="e8c-VX-aux"/>
                         <constraint firstAttribute="trailing" secondItem="7fM-HF-I3S" secondAttribute="trailing" constant="15" id="hTF-Ga-guu"/>
+                        <constraint firstItem="fd1-06-kba" firstAttribute="centerX" secondItem="q2Z-zk-MWK" secondAttribute="centerX" id="jer-cj-vqk"/>
+                        <constraint firstItem="fd1-06-kba" firstAttribute="centerY" secondItem="q2Z-zk-MWK" secondAttribute="centerY" id="wmx-nP-r6U"/>
                     </constraints>
                 </view>
             </subviews>
@@ -76,6 +83,9 @@
     <resources>
         <namedColor name="AlmostBlackColor">
             <color red="0.039000000804662704" green="0.082000002264976501" blue="0.10599999874830246" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="BattleshipGreyColor">
+            <color red="0.46299999952316284" green="0.46299999952316284" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Dark85Color">
             <color red="0.12200000137090683" green="0.16099999845027924" blue="0.17599999904632568" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

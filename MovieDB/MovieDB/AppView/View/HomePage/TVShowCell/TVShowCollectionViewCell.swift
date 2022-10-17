@@ -33,7 +33,7 @@ class TVShowCollectionViewCell: UICollectionViewCell {
         self.downloadImage(with: movieData.imageURL, images: movieImage)
         movieTitle.text = movieData.name
         movieDetails.text = movieData.overview
-        releasedDate.text = movieData.first_air_date
+        releasedDate.text = movieData.firstAirDate
         movieRatings.setTitle(String(movieData.voteAverage ?? 0.0), for: .normal)
     }
     

@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import SkeletonView
 import FittedSheets
 
 class HomePageViewController: UIViewController {
@@ -17,7 +16,7 @@ class HomePageViewController: UIViewController {
     var movieList: MovieList?
     weak var delegate: FetchedDataModelDelegate?
     let homePageViewModel = HomePageViewModel()
-    
+
     @IBOutlet weak var homePageCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -33,8 +32,7 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homePageCollectionView.isSkeletonable = true
-        homePageCollectionView.showSkeleton(usingColor: .wetAsphalt, transition: .crossDissolve(0.25))
+        activityIndicator.startAnimating()
         homePageViewModel.delegate = self
         homePageViewModel.getPopularMoviesCategories()
         setDelegate()
@@ -105,12 +103,7 @@ extension HomePageViewController: UICollectionViewDelegate {
     }
 }
 
-extension HomePageViewController: SkeletonCollectionViewDataSource {
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> SkeletonView.ReusableCellIdentifier {
-        return TVShowCollectionViewCell.identifier
-    }
-    
+extension HomePageViewController:UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
@@ -188,6 +181,9 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomePageViewController: FetchedDataModelDelegate {
+    func getCalledWhenSeasonApiHasBeenCompleted(seasonNumber: Int) {
+       
+    }
     
     func errorNotifier(_ error: Error) {
         displayError(error: error.localizedDescription)
@@ -195,9 +191,10 @@ extension HomePageViewController: FetchedDataModelDelegate {
     
     func configureUIAfterNetworkCall() {
         DispatchQueue.main.async { [weak self] in
-            self?.homePageCollectionView.stopSkeletonAnimation()
-            self?.homePageCollectionView.hideSkeleton()
+            self?.activityIndicator.stopAnimating()
+            self?.activityIndicator.isHidden = true
             self?.homePageCollectionView.reloadData()
+
         }
     }
     
