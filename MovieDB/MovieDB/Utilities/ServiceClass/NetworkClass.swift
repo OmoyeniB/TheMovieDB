@@ -30,6 +30,7 @@ final class NetworkManagerRepository: MovieService {
     func getMovieByCategorieEndpoints<T: Codable>(from endpoint: ApiEndPointHandler, id: Int?, seasonNumber: Int?, expecting: T.Type) -> Future<T, Error> {
         return Future<T, Error> { promise in
             guard let url = self.getUrlByEndPoint(with: endpoint, id: id, seasonNumber: seasonNumber) else {
+                
                 return promise(.failure(NetworkingError.invalid_Url))
             }
             
@@ -62,6 +63,14 @@ final class NetworkManagerRepository: MovieService {
                 return nil
             }
             return queryUrlComponents(urlComponents: urlComponents)
+            
+        } else if endpoint == .tv_series_episode{
+
+            guard let urlComponents = URLComponents(string: "\(baseAPIURL)\(endpoint.rawValue)/\(id ?? 0)/season/\(seasonNumber ?? 0)") else {
+                return nil
+            }
+            return queryUrlComponents(urlComponents: urlComponents)
+            
         }
         else {
             guard let urlComponents = URLComponents(string: "\(baseAPIURL)/\(endpoint.rawValue)") else {
@@ -80,24 +89,4 @@ final class NetworkManagerRepository: MovieService {
     
 }
 
-// https://api.themoviedb.org/3/tv/115646/credits?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US
-
-
-
-
-//https://api.themoviedb.org/3/tv/115646?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US
-
-
-
-//https://api.themoviedb.org/3/tv/popular?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US&page=1
-//https://api.themoviedb.org/3/tv/top_rated?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US&page=1
-//https://api.themoviedb.org/3/tv/airing_today?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US&page=1
-//https://api.themoviedb.org/3/tv/on_the_air?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US&page=1
-/*
- -TotalNumber of season count and episode count
- https://api.themoviedb.org/3/tv/115646?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US
- 
- -Episode details
- https://api.themoviedb.org/3/tv/115646/season/1?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US
- */
 

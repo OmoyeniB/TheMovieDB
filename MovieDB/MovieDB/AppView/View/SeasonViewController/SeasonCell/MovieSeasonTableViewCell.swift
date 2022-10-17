@@ -12,7 +12,8 @@ class MovieSeasonTableViewCell: UITableViewCell {
     var movieID = 0
     var seasonNumber = 0
     static let identifier = "MovieSeasonTableViewCell"
-    var season = [Season]() {
+    
+    var season = [Episode]() {
         didSet {
             episodeCollectionView.reloadData()
         }
@@ -20,7 +21,6 @@ class MovieSeasonTableViewCell: UITableViewCell {
     var seasonHeaderTitleCount: [Int] = [Int]()
     var currentSeasonIndex = 0
     var currentSeason = 0
-    var vc = MovieSeasonViewController()
     
     @IBOutlet weak var episodeCollectionView: UICollectionView!
     
@@ -40,7 +40,7 @@ class MovieSeasonTableViewCell: UITableViewCell {
         episodeCollectionView.registerNib(EpisodeCollectionViewCell.self)
     }
     
-    func setUpCellWith( with season: [Season]) {
+    func setUpCellWith( with season: [Episode]) {
         self.season = season
     }
     
@@ -103,6 +103,5 @@ extension MovieSeasonTableViewCell: UICollectionViewDataSourcePrefetching {
         filteredRow.forEach({ _ in
           _ = self.season
         })
-        print(season)
     }
 }

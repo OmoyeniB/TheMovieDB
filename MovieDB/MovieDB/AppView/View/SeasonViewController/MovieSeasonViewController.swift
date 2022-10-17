@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol PassData: AnyObject {
     func totalEpisodeForCurrentSeason(season: [Episode])
@@ -13,16 +14,24 @@ protocol PassData: AnyObject {
 
 class MovieSeasonViewController: UIViewController {
     
+    var cancellables = Set<AnyCancellable>()
     weak var delegate: PassData?
     var movieID = 0
     var season = [Season]()
     var currentSeasonNumber = 0
     var episode = [Episode]()
+    let movieDetailsViewModel = MovieDetailsViewModel()
+    
+    @IBOutlet weak var uiactivityController: UIActivityIndicatorView!
     @IBOutlet weak var movieSeasonTableView: UITableView!
      
     override func viewDidLoad() {
         super.viewDidLoad()
+        uiactivityController.startAnimating()
         configureTableView()
+        movieDetailsViewModel.movieId = movieID
+        setUpObservers()
+        movieDetailsViewModel.getMovieDetailsByID()
     }
     
     func configureTableView() {
@@ -34,22 +43,37 @@ class MovieSeasonViewController: UIViewController {
         trimTableviewHeader(movieSeasonTableView)
     }
     
+    func setUpObservers() {
+        movieDetailsViewModel.$season
+            .receive(on: RunLoop.main)
+            .sink { [weak self] data in
+                self?.movieDetailsViewModel.fetchEpisodes()
+                
+            }.store(in: &cancellables)
+        movieDetailsViewModel.$seasonAndEpisode
+            .receive(on: RunLoop.main)
+            .sink { [weak self] data in
+                self?.movieSeasonTableView.reloadData()
+                
+            }.store(in: &cancellables)
+    }
+    
 }
 
 extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return [season].count
+        return [movieDetailsViewModel.$season].count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return season.count
+        return movieDetailsViewModel.season.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReuseableCell(MovieSeasonTableViewCell.self, at: indexPath) {
-            cell.setUpCellWith(with: season)
+            cell.setUpCellWith(with: movieDetailsViewModel.seasonAndEpisode[indexPath.section].1)
             return cell
         }
         return UITableViewCell()
@@ -58,7 +82,7 @@ extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let header = tableView.dequeueHeaderFooterView(TableViewSectionHeader.self)
-        header?.setUpSectionHeaderView(with: season[section])
+        header?.setUpSectionHeaderView(with: movieDetailsViewModel.season[section])
         return header
     }
     
@@ -79,10 +103,12 @@ extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate 
 extension MovieSeasonViewController: FetchedDataModelDelegate {
     
     func getCalledWhenSeasonApiHasBeenCompleted(seasonNumber: Int) {
-
         DispatchQueue.main.async {[weak self] in
             self?.movieSeasonTableView.reloadData()
         }
+        self.uiactivityController.stopAnimating()
+        self.uiactivityController.isHidden = true
+        movieDetailsViewModel.getEpisdoeOfSeason(seasonNumber)
     }
     
 
@@ -91,6 +117,7 @@ extension MovieSeasonViewController: FetchedDataModelDelegate {
     }
 
     func configureUIAfterNetworkCall() {
+        
     }
 
 

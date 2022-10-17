@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class MovieDetailsViewController: UIViewController {
     
     var alreadyContained = false
@@ -108,7 +109,7 @@ class MovieDetailsViewController: UIViewController {
         let seasonViewController = MovieSeasonViewController()
         seasonViewController.navigationController?.modalPresentationStyle = .pageSheet
         seasonViewController.navigationController?.modalTransitionStyle = .crossDissolve
-        seasonViewController.season = self.movieDetailsViewModel.seasonNumber
+        seasonViewController.season = self.movieDetailsViewModel.season
         seasonViewController.episode = self.movieDetailsViewModel.episodes
         seasonViewController.movieID = self.id
         navigationController?.present(seasonViewController, animated: true)
@@ -116,7 +117,7 @@ class MovieDetailsViewController: UIViewController {
     
     
     @IBAction func clickToFavorite(_ sender: UIButton) {
-       
+        
     }
     
     func setNavBar() {
@@ -126,6 +127,7 @@ class MovieDetailsViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
     }
+   
 }
 
 extension MovieDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -136,7 +138,7 @@ extension MovieDetailsViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCastCollectionViewCell.identifier, for: indexPath) as? MovieCastCollectionViewCell {
-           
+            
             cell.setUpCellWith(movieDetailsViewModel.movieCast[indexPath.item], season: movieDetailsViewModel.episodes)
             return cell
         }
@@ -173,7 +175,19 @@ extension MovieDetailsViewController: UICollectionViewDataSource, UICollectionVi
 extension MovieDetailsViewController: FetchedDataModelDelegate {
     
     func getCalledWhenSeasonApiHasBeenCompleted(seasonNumber: Int) {
+        movieDetailsViewModel.getEpisdoeOfSeason(seasonNumber)
+        DispatchQueue.main.async { [weak self] in
+            self?.lastSeason.text = "Season \(self?.seasonNumber ?? 0)"
+            self?.movieCastCollectionView.reloadData()
+        }
+        for number in movieDetailsViewModel.movieDetailsData {
+            self.seasonNumber = number.numberOfSeasons ?? 0
+        }
+        self.episode = movieDetailsViewModel.episodes
+        populateDetailsViewWithDataFromDetailsViewModel(model: movieDetailsViewModel.movieDetailsData)
         
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
     
     
@@ -182,21 +196,8 @@ extension MovieDetailsViewController: FetchedDataModelDelegate {
     }
     
     func configureUIAfterNetworkCall() {
-      
-        for number in movieDetailsViewModel.movieDetailsData {
-            seasonNumber = number.numberOfSeasons ?? 0
-        }
         
-        DispatchQueue.main.async { [weak self] in
-            self?.lastSeason.text = "Season \(self?.seasonNumber ?? 0)"
-            self?.movieCastCollectionView.reloadData()
-        }
-     
-        self.episode = movieDetailsViewModel.episodes
-        populateDetailsViewWithDataFromDetailsViewModel(model: movieDetailsViewModel.movieDetailsData)
         
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
     }
     
     
