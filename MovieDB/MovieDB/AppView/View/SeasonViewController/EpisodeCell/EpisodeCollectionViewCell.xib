@@ -27,11 +27,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="275" height="137"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sG6-7A-FgR">
-                                <rect key="frame" x="0.0" y="0.0" width="275" height="91.666666666666671"/>
-                                <color key="backgroundColor" name="TouchBarBezel"/>
+                                <rect key="frame" x="0.0" y="0.0" width="275" height="92"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-2t-fq0">
-                                <rect key="frame" x="17" y="111.66666666666667" width="241" height="14.333333333333329"/>
+                                <rect key="frame" x="17" y="112" width="241" height="14"/>
                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
                                 <color key="textColor" name="WhiteColor"/>
                                 <nil key="highlightedColor"/>
@@ -56,6 +56,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="qQc-zh-ff6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="czz-oG-Mif"/>
                 <constraint firstItem="qQc-zh-ff6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="i8O-4o-q7t"/>
@@ -73,9 +74,6 @@
     <resources>
         <namedColor name="Dark85Color">
             <color red="0.12200000137090683" green="0.16099999845027924" blue="0.17599999904632568" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="TouchBarBezel">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="WhiteColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

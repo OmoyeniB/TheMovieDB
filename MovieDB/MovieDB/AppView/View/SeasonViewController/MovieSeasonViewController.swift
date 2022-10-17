@@ -54,11 +54,10 @@ extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReuseableCell(MovieSeasonTableViewCell.self, at: indexPath) {
-            cell.setUpCellWith(movieID: movieID, with: seasonNumber, seasonHeaderTitleCount: seasonHeaderTitleCount, section: indexPath.section, episode: self.episode)
-            print(indexPath.section)
+            
+            cell.setUpCellWith(movieID: movieID, with: seasonNumber, seasonHeaderTitleCount: seasonHeaderTitleCount, section: indexPath.section, episode: viewModel.episodes)
             viewModel.movieId = movieID
             viewModel.seasonNumber = indexPath.section + 1
-            viewModel.getSeriesEpisodeById_SeasonNumber()
             return cell
         }
         return UITableViewCell()
@@ -68,9 +67,7 @@ extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate 
         
         let header = tableView.dequeueHeaderFooterView(TableViewSectionHeader.self)
         header?.seasonHeaderTitleCount = seasonHeaderTitleCount
-       
          header?.setUpSectionHeaderView(with: seasonNumber, seasonHeaderTitleCount: seasonHeaderTitleCount, section: section)
-        
         return header
     }
     
@@ -78,24 +75,32 @@ extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate 
         return 46
     }
     
-    func tryii(data: [Episode]) {
-        season_episode = { _ in
-            self.episode = data
-        }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        view.tintColor = UIColor.clear
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = .clear
     }
+    
     
 }
 
 
 extension MovieSeasonViewController: FetchedDataModelDelegate {
+    
+    func getCalledWhenSeasonApiHasBeenCompleted(seasonNumber: Int) {
+
+        DispatchQueue.main.async {[weak self] in
+            self?.movieSeasonTableView.reloadData()
+        }
+    }
+    
 
     func errorNotifier(_ error: Error) {
         print(error)
     }
 
     func configureUIAfterNetworkCall() {
-        print(viewModel.episodes, "^^^^^^^^^^^")
-        tryii(data: viewModel.episodes)
+        viewModel.getSeriesEpisodeById_SeasonNumber()
     }
 
 

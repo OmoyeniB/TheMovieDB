@@ -8,6 +8,7 @@
 protocol FetchedDataModelDelegate: AnyObject {
     func errorNotifier(_ error: Error)
     func configureUIAfterNetworkCall()
+    func getCalledWhenSeasonApiHasBeenCompleted(seasonNumber: Int)
 }
 
 import Foundation

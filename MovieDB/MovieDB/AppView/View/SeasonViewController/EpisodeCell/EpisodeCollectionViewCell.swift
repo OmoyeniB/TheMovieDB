@@ -23,11 +23,17 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
     }
     
-    func setUpCellWith(movieID: Int, currentSeason: Int) {
-       
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        episodeImage.image = nil
+        episodeTitle.text = ""
+    }
+    
+    func setUpCellWith(episode: Episode) {
+        episodeTitle.text = episode.name
+        downloadImage(with: episode.imageURL, images: episodeImage)
     }
     
 }

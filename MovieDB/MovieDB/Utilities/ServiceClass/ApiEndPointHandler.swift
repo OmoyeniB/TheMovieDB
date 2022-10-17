@@ -15,6 +15,7 @@ enum ApiEndPointHandler: String, CaseIterable {
     case on_the_air = "tv/on_the_air"
     case tv_series_season = "tv/"
     case tv_series_episode = "/tv/"
+    case series_casts = "/tv"
     
    public var description: String {
         switch self {
@@ -24,18 +25,9 @@ enum ApiEndPointHandler: String, CaseIterable {
         case .on_the_air: return "on_the_air"
         case .tv_series_season: return "total_tv_season"
         case .tv_series_episode: return "series_episode"
+        case .series_casts: return "credits_casts"
         }
     }
-    
-//    public init?(index: Int) {
-//        switch index {
-//        case 0: self = .popular
-//        case 1: self = .top_rated
-//        case 2: self = .airing_today
-//        case 3: self = .on_the_air
-//        default: return nil
-//        }
-//    }
     
     public init?(description: String) {
         guard let first = ApiEndPointHandler.allCases.first(where: { $0.description == description }) else {

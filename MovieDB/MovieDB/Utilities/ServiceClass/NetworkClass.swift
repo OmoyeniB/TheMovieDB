@@ -63,7 +63,15 @@ final class NetworkManagerRepository: MovieService {
                 return nil
             }
             return queryUrlComponents(urlComponents: urlComponents)
-        } else {
+            
+        } else if endpoint == .series_casts {
+            guard let urlComponents = URLComponents(string: "\(baseAPIURL)\(endpoint.rawValue)/\(id ?? 0)/credits") else {
+                return nil
+            }
+            print(urlComponents)
+            return queryUrlComponents(urlComponents: urlComponents)
+        }
+        else {
             guard let urlComponents = URLComponents(string: "\(baseAPIURL)/\(endpoint.rawValue)") else {
                 return nil
             }
@@ -79,6 +87,16 @@ final class NetworkManagerRepository: MovieService {
     }
     
 }
+
+// https://api.themoviedb.org/3/tv/115646/credits?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US
+
+
+
+
+//https://api.themoviedb.org/3/tv/115646?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US
+
+
+
 //https://api.themoviedb.org/3/tv/popular?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US&page=1
 //https://api.themoviedb.org/3/tv/top_rated?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US&page=1
 //https://api.themoviedb.org/3/tv/airing_today?api_key=b9fd3c0c458976b0ccced6820b43e561&language=en-US&page=1

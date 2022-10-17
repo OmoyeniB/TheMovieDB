@@ -27,8 +27,13 @@ class MovieSeasonTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpCollectionView()
+        
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        self.episodeCollectionView.contentView = nil
+    }
 
     func setUpCollectionView() {
         episodeCollectionView.delegate = self
@@ -36,16 +41,21 @@ class MovieSeasonTableViewCell: UITableViewCell {
         episodeCollectionView.registerNib(EpisodeCollectionViewCell.self)
     }
     
-    func setUpCellWith(movieID: Int, with numberOfSection: Int, seasonHeaderTitleCount: [Int], section: Int, episode: [Episode]) {
-        if numberOfSection > 0 {
-            for i in 1...numberOfSection {
-                self.seasonHeaderTitleCount.append(i)
-            }
-        }
-        //        self.movieID = movieID
-        //        currentSeason = section + 1
-                self.episode = episode
-        episodeCollectionView.reloadData()
+    func setUpCellWith(
+        movieID: Int,
+        with numberOfSection: Int,
+        seasonHeaderTitleCount: [Int],
+        section: Int,
+        episode: [Episode]
+    ) {
+         // 4
+        //1
+        //2
+        //3
+        //4
+        self.episode = episode
+//        print(episode, "((((((((((___")
+        self.episodeCollectionView.reloadData()
     }
     
 }
@@ -60,6 +70,8 @@ extension MovieSeasonTableViewCell: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(EpisodeCollectionViewCell.self, for: indexPath)
+        cell.setUpCellWith(episode: episode[indexPath.item])
+//        self.episodeCollectionView.reloadData()
         return cell
     }
     
