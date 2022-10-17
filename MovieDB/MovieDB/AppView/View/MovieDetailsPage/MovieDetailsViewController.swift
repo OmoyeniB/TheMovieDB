@@ -10,24 +10,19 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
     
     var alreadyContained = false
-    let persistence = MovieDBersistenceStore()
     var isliked = false
     var totalNumberOfTvSeriesSeason: Int = 0
     var movieList: MovieList?
     var creator: [String] = [String]()
     var episode = [Episode]()
     let movieDetailsViewModel = MovieDetailsViewModel()
-    var favoritedItem = [RealmFavoritedModelObjects]() {
+    var movieCast = [Cast]()
+    var seasonNumber = 0 {
         didSet {
-            
         }
     }
-    var mockTrial = [Int]()
-    var persistedData = [RealmFavoritedModelObjects]()
-    var copyOfFavoriteItem: RealmFavoritedModelObjects?
-    var movieCast = [Cast]()
     var id: Int = 0
-    lazy var _titles: String = ""
+    
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieDescription: UITextView!
     @IBOutlet weak var movieTitle: UILabel!
@@ -36,17 +31,20 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var mostRecentSeason: UILabel!
     @IBOutlet weak var seasonImage: UIImageView!
     @IBOutlet weak var movieCastCollectionView: UICollectionView!
+    @IBOutlet weak var lastSeason: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var averageMovieRating: UILabel!
+    @IBOutlet weak var releasedDate: UILabel!
     
+    @IBOutlet weak var averageRatings: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         unwrapDataNeededToDisPlayData()
         movieDetailsViewModel.movieId = self.id
         movieDetailsViewModel.getMovieDetailsByID()
         configureView()
-        self.favoritedItem = FetchFavoritedDataFromRealm().data
-        self.persistedData = FetchFavoritedDataFromRealm().data
+        movieDetailsViewModel.closure = {
+            self.movieCastCollectionView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,9 +53,21 @@ class MovieDetailsViewController: UIViewController {
         setNavbarOpacity()
     }
     
+    func configureView() {
+        activityIndicator.startAnimating()
+        movieDetailsViewModel.delegate = self
+        configureCollectionView()
+        lastSeason.text = "\(seasonNumber)"
+        averageRatings.text = "\(movieList?.voteAverage ?? 0.0)"
+        releasedDate.text = Date.getFormattedDate(string: movieList?.releaseDate ?? "", formatter: "yyyy-MM-dd")
+        movieDescription.isEditable = false
+        movieDescription.isScrollEnabled = true
+    }
+    
     func configureCollectionView() {
         movieCastCollectionView.register(MovieCastCollectionViewCell.self, forCellWithReuseIdentifier: MovieCastCollectionViewCell.identifier)
-        //        movieCastCollectionView.registerNib(MovieCastCollectionViewCell.self)
+        movieCastCollectionView.delegate = self
+        movieCastCollectionView.dataSource = self
     }
     
     func unwrapDataNeededToDisPlayData() {
@@ -98,72 +108,20 @@ class MovieDetailsViewController: UIViewController {
         let seasonViewController = MovieSeasonViewController()
         seasonViewController.navigationController?.modalPresentationStyle = .pageSheet
         seasonViewController.navigationController?.modalTransitionStyle = .crossDissolve
-        seasonViewController.seasonNumber = self.totalNumberOfTvSeriesSeason
+        seasonViewController.season = self.movieDetailsViewModel.seasonNumber
+        seasonViewController.episode = self.movieDetailsViewModel.episodes
         seasonViewController.movieID = self.id
         navigationController?.present(seasonViewController, animated: true)
     }
     
-    // moviList
-    /*
-     if favoritedItem .contains movilist.item ... remove it
-     */
-    
-    func addToFavorite(sender: UIButton) {
-        
-        if mockTrial.contains(where: {$0 == movieList?.id}) {
-            self.mockTrial.removeAll(where: { $0 == movieList?.id})
-            sender.tintColor = .gray
-            print("remove")
-        } else {
-            mockTrial.append(movieList?.id ?? 0)
-            print("added")
-            sender.tintColor = .red
-        }
-        
-        copyOfFavoriteItem = saveItemToRealm()
-//        if favoritedItem.contains(where: { $0.isLiked == copyOfFavoriteItem?.isLiked }) {
-//            RealmPersistenceHandler.addToIsFavorite(favoritedState: saveItemToRealm())
-//            print("remove")
-//        } else {
-////            copyOfFavoriteItem = saveItemToRealm()
-//            RealmPersistenceHandler.addToIsFavorite(favoritedState: saveItemToRealm())
-//            print("added")
-//        }
-//
-//        self.persistedData = FetchFavoritedDataFromRealm().data
-    }
-    
-    func saveItemToRealm() -> RealmFavoritedModelObjects {
-        if let movieList = movieList {
-            let modelToRealmObject = RealmFavoritedModelObjects()
-            modelToRealmObject.id = movieList.id ?? 0
-            modelToRealmObject.image = movieList.posterPath ?? ""
-            modelToRealmObject.averageRatings = movieList.voteAverage ?? 0.0
-            modelToRealmObject.date_Aired = movieList.releaseDate ?? ""
-//            modelToRealmObject.isLiked = false
-            persistence.save(items: modelToRealmObject)
-            return modelToRealmObject
-        }
-       return RealmFavoritedModelObjects()
-    }
     
     @IBAction func clickToFavorite(_ sender: UIButton) {
-        addToFavorite(sender: sender)
-    }
-    
-    func configureView() {
-        activityIndicator.startAnimating()
-        movieDetailsViewModel.delegate = self
-        configureCollectionView()
-        movieDescription.isEditable = false
-        movieDescription.isScrollEnabled = true
-        
+       
     }
     
     func setNavBar() {
         let backButton = UIBarButtonItem()
         backButton.tintColor = .white
-        //        backButton.setTit
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
@@ -173,29 +131,24 @@ class MovieDetailsViewController: UIViewController {
 extension MovieDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(movieDetailsViewModel.movieCast.count, "Yaaaaahhhh")
-        return 3
+        return movieDetailsViewModel.movieCast.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCastCollectionViewCell.identifier, for: indexPath) as? MovieCastCollectionViewCell? {
-            //                cell?.actorName.text = self.movieDetailsViewModel.movieCast[indexPath.item].name
-            
-            return cell ?? UICollectionViewCell()
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCastCollectionViewCell.identifier, for: indexPath) as? MovieCastCollectionViewCell {
+           
+            cell.setUpCellWith(movieDetailsViewModel.movieCast[indexPath.item], season: movieDetailsViewModel.episodes)
+            return cell
         }
-        //        cell.textLabel?.text = movieDetailsViewModel.movieCast[indexPath.item].name
-        //        cell?.setUpCellWith(movieDetailsViewModel.movieCast[indexPath.item])
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let padding: CGFloat =  20
-        let collectionViewSize = collectionView.frame.size.width - padding
-        
-        return CGSize(width: collectionViewSize/2, height: collectionView.frame.size.height / 1.7)
+        let collectionViewSize = collectionView.frame.size.width
+        return CGSize(width: collectionView.frame.size.height - padding, height: collectionView.frame.size.height)
     }
     
     public func collectionView(_ collectionView: UICollectionView,
@@ -207,7 +160,7 @@ extension MovieDetailsViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 100
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -220,10 +173,7 @@ extension MovieDetailsViewController: UICollectionViewDataSource, UICollectionVi
 extension MovieDetailsViewController: FetchedDataModelDelegate {
     
     func getCalledWhenSeasonApiHasBeenCompleted(seasonNumber: Int) {
-        movieDetailsViewModel.getSeriesEpisodeById_SeasonNumber()
-        movieCast = movieDetailsViewModel.movieCast
-        movieCastCollectionView.delegate = self
-        movieCastCollectionView.dataSource = self
+        
     }
     
     
@@ -232,13 +182,21 @@ extension MovieDetailsViewController: FetchedDataModelDelegate {
     }
     
     func configureUIAfterNetworkCall() {
+      
+        for number in movieDetailsViewModel.movieDetailsData {
+            seasonNumber = number.numberOfSeasons ?? 0
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.lastSeason.text = "Season \(self?.seasonNumber ?? 0)"
+            self?.movieCastCollectionView.reloadData()
+        }
+     
+        self.episode = movieDetailsViewModel.episodes
         populateDetailsViewWithDataFromDetailsViewModel(model: movieDetailsViewModel.movieDetailsData)
+        
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
-        movieCastCollectionView.reloadData()
-        //        DispatchQueue.main.async {
-        //            self.movieCastCollectionView.reloadData()
-        //        }
     }
     
     

@@ -13,6 +13,7 @@ class TVShowCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "TVShowCollectionViewCell"
     
+    @IBOutlet weak var containerview: UIView!
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var releasedDate: UILabel!
@@ -24,16 +25,19 @@ class TVShowCollectionViewCell: UICollectionViewCell {
         initiateSetUp()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
     func initiateSetUp() {
         movieImage.setTopCornerRadius()
-        movieImage.addShadowToImageView()
     }
     
     func setUpCell(with movieData: MovieList) {
         self.downloadImage(with: movieData.imageURL, images: movieImage)
         movieTitle.text = movieData.name
-        movieDetails.text = movieData.overview
-        releasedDate.text = movieData.firstAirDate
+        defaultTextForOverView(text: movieDetails, dataText: movieData)
+        releasedDate.text = Date.getFormattedDate(string: movieData.firstAirDate ?? "", formatter: "yyyy-MM-dd")
         movieRatings.setTitle(String(movieData.voteAverage ?? 0.0), for: .normal)
     }
     
@@ -41,7 +45,6 @@ class TVShowCollectionViewCell: UICollectionViewCell {
     }
     
     
-   
 }
 
 

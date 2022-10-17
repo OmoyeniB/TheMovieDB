@@ -12,9 +12,9 @@ class MovieSeasonTableViewCell: UITableViewCell {
     var movieID = 0
     var seasonNumber = 0
     static let identifier = "MovieSeasonTableViewCell"
-    var episode = [Episode]() {
+    var season = [Season]() {
         didSet {
-            
+            episodeCollectionView.reloadData()
         }
     }
     var seasonHeaderTitleCount: [Int] = [Int]()
@@ -27,35 +27,21 @@ class MovieSeasonTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpCollectionView()
-        
+        episodeCollectionView.prefetchDataSource = self
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        self.episodeCollectionView.contentView = nil
     }
-
+    
     func setUpCollectionView() {
         episodeCollectionView.delegate = self
         episodeCollectionView.dataSource = self
         episodeCollectionView.registerNib(EpisodeCollectionViewCell.self)
     }
     
-    func setUpCellWith(
-        movieID: Int,
-        with numberOfSection: Int,
-        seasonHeaderTitleCount: [Int],
-        section: Int,
-        episode: [Episode]
-    ) {
-         // 4
-        //1
-        //2
-        //3
-        //4
-        self.episode = episode
-//        print(episode, "((((((((((___")
-        self.episodeCollectionView.reloadData()
+    func setUpCellWith( with season: [Season]) {
+        self.season = season
     }
     
 }
@@ -64,14 +50,13 @@ class MovieSeasonTableViewCell: UITableViewCell {
 extension MovieSeasonTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return episode.count
+        return season.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(EpisodeCollectionViewCell.self, for: indexPath)
-        cell.setUpCellWith(episode: episode[indexPath.item])
-//        self.episodeCollectionView.reloadData()
+        cell.setUpCellWith(episode: season[indexPath.item])
+        
         return cell
     }
     
@@ -106,5 +91,18 @@ extension MovieSeasonTableViewCell: UICollectionViewDelegateFlowLayout {
         return 46
     }
     
+    
 }
 
+extension MovieSeasonTableViewCell: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let filteredRow = indexPaths.filter{$0.row >= season.count - 1}
+        if filteredRow.count > 1 {
+           _ = season.count + 1
+        }
+        filteredRow.forEach({ _ in
+          _ = self.season
+        })
+        print(season)
+    }
+}

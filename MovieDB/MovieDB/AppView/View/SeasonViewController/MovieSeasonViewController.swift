@@ -14,20 +14,15 @@ protocol PassData: AnyObject {
 class MovieSeasonViewController: UIViewController {
     
     weak var delegate: PassData?
-    var viewModel = MoviesEpisodeViewModel()
     var movieID = 0
-    var seasonNumber = 0
+    var season = [Season]()
     var currentSeasonNumber = 0
-    var seasonHeaderTitleCount: [Int] = [Int]()
-    var season_episode: (([Episode]) -> Void)?
     var episode = [Episode]()
-    
     @IBOutlet weak var movieSeasonTableView: UITableView!
      
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        viewModel.delegate = self
     }
     
     func configureTableView() {
@@ -45,19 +40,16 @@ extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return [seasonNumber].count
+        return [season].count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return seasonNumber
+        return season.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReuseableCell(MovieSeasonTableViewCell.self, at: indexPath) {
-            
-            cell.setUpCellWith(movieID: movieID, with: seasonNumber, seasonHeaderTitleCount: seasonHeaderTitleCount, section: indexPath.section, episode: viewModel.episodes)
-            viewModel.movieId = movieID
-            viewModel.seasonNumber = indexPath.section + 1
+            cell.setUpCellWith(with: season)
             return cell
         }
         return UITableViewCell()
@@ -66,8 +58,7 @@ extension MovieSeasonViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let header = tableView.dequeueHeaderFooterView(TableViewSectionHeader.self)
-        header?.seasonHeaderTitleCount = seasonHeaderTitleCount
-         header?.setUpSectionHeaderView(with: seasonNumber, seasonHeaderTitleCount: seasonHeaderTitleCount, section: section)
+        header?.setUpSectionHeaderView(with: season[section])
         return header
     }
     
@@ -96,11 +87,10 @@ extension MovieSeasonViewController: FetchedDataModelDelegate {
     
 
     func errorNotifier(_ error: Error) {
-        print(error)
+        self.displayError(error: error.localizedDescription)
     }
 
     func configureUIAfterNetworkCall() {
-        viewModel.getSeriesEpisodeById_SeasonNumber()
     }
 
 

@@ -12,8 +12,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     static let identifier = "EpisodeCollectionViewCell"
     var seasonHeaderTitleCount: [Int] = [Int]()
     var episode = [Episode]()
-    var episodeTitl = [Episode]()
-    let viewModel = MoviesEpisodeViewModel()
     var strings = ""
     var movieID = 0
     var currentSeason = 0
@@ -31,7 +29,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         episodeTitle.text = ""
     }
     
-    func setUpCellWith(episode: Episode) {
+    func setUpCellWith(episode: Season) {
         episodeTitle.text = episode.name
         downloadImage(with: episode.imageURL, images: episodeImage)
     }

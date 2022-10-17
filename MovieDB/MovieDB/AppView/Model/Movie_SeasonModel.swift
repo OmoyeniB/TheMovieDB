@@ -42,6 +42,10 @@ struct Season: Codable {
     let airDate: String?
     let episodeCount, id: Int?
     let name, overview: String?
+    let posterPath: String?
     let seasonNumber: Int?
+    
+    var imageURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
+    }
 }
-

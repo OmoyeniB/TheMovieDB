@@ -12,7 +12,6 @@ class TableViewSectionHeader: UITableViewHeaderFooterView {
     
     static let identifier = "Header"
     var seasonHeaderTitleCount: [Int] = [Int]()
-    
     lazy var sectionHeader: UILabel = {
         var sectionHeader = UILabel()
         sectionHeader.text = ""
@@ -42,14 +41,8 @@ class TableViewSectionHeader: UITableViewHeaderFooterView {
         })
     }
     
-    func setUpSectionHeaderView(with numberOfSection: Int, seasonHeaderTitleCount: [Int], section: Int) {
-        if numberOfSection > 0 {
-            for i in 1...numberOfSection {
-                self.seasonHeaderTitleCount.append(i)
-            }
-            sectionHeader.text = "Season \(self.seasonHeaderTitleCount[section])"
-        }
-        
+    func setUpSectionHeaderView(with seasonHeaderTitleCount: Season) {
+        sectionHeader.text = "Season \((seasonHeaderTitleCount.seasonNumber ?? 0) + 1)"
     }
     
 }

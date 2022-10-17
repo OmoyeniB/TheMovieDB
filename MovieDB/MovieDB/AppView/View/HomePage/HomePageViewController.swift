@@ -88,9 +88,6 @@ class HomePageViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightNavItem
     }
     
-    
-    
-    
 }
 
 extension HomePageViewController: UICollectionViewDelegate {

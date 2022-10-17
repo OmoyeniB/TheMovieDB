@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -87,8 +86,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Uhx-Z2-9J6">
-                    <rect key="frame" x="20" y="347.66666666666674" width="350" height="462.33333333333326"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <rect key="frame" x="20" y="367.66666666666674" width="350" height="442.33333333333326"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zh6-w8-9DJ">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -102,7 +101,7 @@
             <constraints>
                 <constraint firstItem="0gN-rn-8Hp" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="2ra-Zf-qmp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0gN-rn-8Hp" secondAttribute="trailing" constant="20.670000000000002" id="GBD-VQ-wtV"/>
-                <constraint firstItem="Uhx-Z2-9J6" firstAttribute="top" secondItem="TnV-uI-Kyf" secondAttribute="bottom" constant="30" id="HR9-pU-4ib"/>
+                <constraint firstItem="Uhx-Z2-9J6" firstAttribute="top" secondItem="TnV-uI-Kyf" secondAttribute="bottom" constant="50" id="HR9-pU-4ib"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uhx-Z2-9J6" secondAttribute="trailing" constant="20" id="ICs-NV-WVT"/>
                 <constraint firstItem="TnV-uI-Kyf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Jbc-ac-Gbb"/>
                 <constraint firstItem="Uhx-Z2-9J6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Tw5-nA-rDj"/>
@@ -125,8 +124,5 @@
         <namedColor name="WhiteColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

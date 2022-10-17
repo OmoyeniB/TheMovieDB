@@ -8,7 +8,7 @@
 import UIKit
 
 class BottomSheetViewControllerViewController: UIViewController {
-
+    
     @IBOutlet weak var profileTableView: UITableView!
     
     let profileViewModel = ProfileViewModel()
@@ -28,6 +28,8 @@ class BottomSheetViewControllerViewController: UIViewController {
     func handleDelegatePerformance(_ indexPath: IndexPath) {
         
         switch indexPath.row {
+        case 0:
+            print()
         case 1:
             let vc3 = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
             let navController = UINavigationController(rootViewController: vc3)
@@ -36,13 +38,16 @@ class BottomSheetViewControllerViewController: UIViewController {
         case 2:
             weak var presentVc = self.presentingViewController
             self.dismiss(animated: true, completion: {
-                let vc = ProfileViewController()
-                vc.modalPresentationStyle = .custom
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "Main")
+                self.present(vc, animated: true)
                 vc.modalTransitionStyle = .crossDissolve
-                presentVc?.present(vc, animated: true, completion: nil)
+                vc.modalPresentationStyle = .fullScreen
+                presentVc?.present(vc, animated: true, completion: {
+                })
             })
         case 3:
-            self.dismiss(animated: true)
+            self.presentingViewController?.dismiss(animated: false, completion:nil)
         default:
             break
         }
@@ -62,7 +67,7 @@ class BottomSheetViewControllerViewController: UIViewController {
                 cell.textLabel?.textColor = Constants.Colors.coralColor
                 cell.textLabel?.font = UIFont(name: Constants.Fonts.sf_pro_regular, size: 20)
             }
-           
+            
         }
     }
 }
@@ -71,7 +76,6 @@ extension BottomSheetViewControllerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         profileViewModel.displayProfileItem.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReuseableCell(BottomSheetTableViewCell.self, at: indexPath)
@@ -88,7 +92,7 @@ extension BottomSheetViewControllerViewController: UITableViewDataSource {
 extension BottomSheetViewControllerViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       handleDelegatePerformance(indexPath)
+        handleDelegatePerformance(indexPath)
     }
 }
 

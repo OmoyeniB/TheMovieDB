@@ -40,12 +40,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="179" height="231.33333333333334"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="231.33000000000001" id="ef7-in-zMx"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="231.33000000000001" id="nlH-82-c4e"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srC-HD-a8b">
@@ -53,11 +53,8 @@
                                 <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="13"/>
                                 <color key="textColor" name="AlgaeGreenColor"/>
                                 <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7OQ-lM-aUg">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7OQ-lM-aUg">
                                 <rect key="frame" x="8" y="258.66666666666669" width="163" height="17"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021-01-24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhM-Fp-Uhw">
@@ -67,7 +64,7 @@
                                         <color key="textColor" name="AlgaeGreenColor"/>
                                         <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVA-ML-KBg">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVA-ML-KBg">
                                         <rect key="frame" x="124.66666666666664" y="0.0" width="38.333333333333329" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="38.329999999999998" id="pq6-YV-dgH"/>
@@ -104,9 +101,6 @@
                                     <constraint firstItem="fhM-Fp-Uhw" firstAttribute="leading" secondItem="7OQ-lM-aUg" secondAttribute="leading" id="x8Q-Be-1ng"/>
                                     <constraint firstItem="fhM-Fp-Uhw" firstAttribute="top" secondItem="7OQ-lM-aUg" secondAttribute="top" id="zhS-M4-mQK"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z8B-Yy-OJ1">
                                 <rect key="frame" x="8" y="285.66666666666669" width="163" height="79.333333333333314"/>
@@ -118,9 +112,6 @@
                                 <color key="textColor" name="WhiteColor"/>
                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" name="DarkColor"/>
@@ -131,9 +122,12 @@
                             <constraint firstAttribute="trailing" secondItem="vJ0-nS-jnf" secondAttribute="trailing" id="6M2-Vi-QaA"/>
                             <constraint firstAttribute="bottom" secondItem="z8B-Yy-OJ1" secondAttribute="bottom" id="8Rd-zS-u2w"/>
                             <constraint firstAttribute="trailing" secondItem="srC-HD-a8b" secondAttribute="trailing" constant="8" id="AJa-GU-z5q"/>
+                            <constraint firstAttribute="trailing" secondItem="vJ0-nS-jnf" secondAttribute="trailing" id="BrB-jh-DR9"/>
+                            <constraint firstItem="vJ0-nS-jnf" firstAttribute="leading" secondItem="K2q-bH-yIR" secondAttribute="leading" id="Dh0-0r-l2j"/>
                             <constraint firstAttribute="trailing" secondItem="7OQ-lM-aUg" secondAttribute="trailing" constant="8" id="EWE-3Y-AGl"/>
                             <constraint firstAttribute="trailing" secondItem="z8B-Yy-OJ1" secondAttribute="trailing" constant="8" id="Kfd-RP-MMN"/>
                             <constraint firstItem="vJ0-nS-jnf" firstAttribute="top" secondItem="K2q-bH-yIR" secondAttribute="top" id="ba9-QD-Lcb"/>
+                            <constraint firstItem="vJ0-nS-jnf" firstAttribute="top" secondItem="K2q-bH-yIR" secondAttribute="top" id="f9B-Cc-Wv5"/>
                             <constraint firstItem="srC-HD-a8b" firstAttribute="leading" secondItem="K2q-bH-yIR" secondAttribute="leading" constant="8" id="rlS-5i-Tqn"/>
                             <constraint firstItem="srC-HD-a8b" firstAttribute="top" secondItem="vJ0-nS-jnf" secondAttribute="bottom" constant="15" id="rzj-gT-gp4"/>
                             <constraint firstItem="7OQ-lM-aUg" firstAttribute="top" secondItem="srC-HD-a8b" secondAttribute="bottom" constant="5" id="seJ-T6-zMh"/>
@@ -143,7 +137,6 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="20"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
@@ -156,10 +149,8 @@
                 <constraint firstItem="K2q-bH-yIR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wTJ-HE-GSQ"/>
             </constraints>
             <size key="customSize" width="179" height="365"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-            </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="containerview" destination="K2q-bH-yIR" id="Ov3-i4-lFQ"/>
                 <outlet property="movieDetails" destination="z8B-Yy-OJ1" id="gTz-1J-trF"/>
                 <outlet property="movieImage" destination="vJ0-nS-jnf" id="xpn-yl-t4q"/>
                 <outlet property="movieRatings" destination="sVA-ML-KBg" id="ffi-kg-3bm"/>

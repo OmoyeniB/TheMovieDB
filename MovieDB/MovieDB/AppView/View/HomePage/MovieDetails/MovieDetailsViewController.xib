@@ -24,14 +24,16 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MovieDetailsViewController" customModule="MovieDB" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="O9O-BI-eLm" id="L3t-ix-MXh"/>
-                <outlet property="averageMovieRating" destination="DZD-TU-1CE" id="vHB-nB-aBI"/>
+                <outlet property="averageRatings" destination="DZD-TU-1CE" id="r1w-iv-mMf"/>
                 <outlet property="favoriteButton" destination="sYm-kv-I3v" id="nlG-up-Bzn"/>
+                <outlet property="lastSeason" destination="1r1-oD-qev" id="Fkf-8m-B6k"/>
                 <outlet property="mostRecentSeason" destination="1r1-oD-qev" id="cUa-5y-UB9"/>
                 <outlet property="movieCastCollectionView" destination="wrO-1q-f1I" id="0MQ-il-SdY"/>
                 <outlet property="movieCreator" destination="TCe-ED-lEg" id="BZy-GX-x2b"/>
                 <outlet property="movieDescription" destination="i4P-yj-d0J" id="Va9-B2-OTz"/>
                 <outlet property="movieImage" destination="yVM-ql-9mn" id="o8c-hv-xIt"/>
                 <outlet property="movieTitle" destination="Xef-ya-IvH" id="xb4-0z-3xf"/>
+                <outlet property="releasedDate" destination="Kly-G0-Ufx" id="NMG-Sw-vaP"/>
                 <outlet property="seasonImage" destination="f6E-0J-iUx" id="BUe-9g-Bjk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -51,7 +53,7 @@
                     <rect key="frame" x="20" y="147" width="350" height="697"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xmu-7h-lZ3">
-                            <rect key="frame" x="0.0" y="0.0" width="350" height="876.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="350" height="906.33333333333337"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="5fd-N2-D31">
                                     <rect key="frame" x="20" y="30" width="310" height="846.33333333333337"/>
@@ -210,10 +212,7 @@
                                         </label>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wrO-1q-f1I">
                                             <rect key="frame" x="0.0" y="656" width="310" height="190.33333333333337"/>
-                                            <color key="backgroundColor" name="AlgaeGreenColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="190.33000000000001" id="mov-Du-COT"/>
-                                            </constraints>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jWG-Jx-tPJ">
                                                 <size key="itemSize" width="128" height="128"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -224,7 +223,6 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="SXv-PW-ggk" firstAttribute="leading" secondItem="5fd-N2-D31" secondAttribute="leading" id="29D-qv-bUO"/>
-                                        <constraint firstAttribute="bottom" secondItem="wrO-1q-f1I" secondAttribute="bottom" id="852-Pf-3hX"/>
                                         <constraint firstItem="fCS-uZ-l1H" firstAttribute="top" secondItem="bAk-Ch-BJ0" secondAttribute="bottom" constant="22" id="ANN-cd-GdL"/>
                                         <constraint firstItem="SPe-Kg-x1R" firstAttribute="top" secondItem="SXv-PW-ggk" secondAttribute="bottom" constant="22" id="Cfm-Rj-i0C"/>
                                         <constraint firstAttribute="trailing" secondItem="SPe-Kg-x1R" secondAttribute="trailing" id="KtR-EP-j2z"/>
@@ -244,7 +242,7 @@
                             <color key="backgroundColor" red="0.14509803921568626" green="0.15294117647058825" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="5fd-N2-D31" secondAttribute="trailing" constant="20" id="CEj-Vh-Cbe"/>
-                                <constraint firstAttribute="bottom" secondItem="5fd-N2-D31" secondAttribute="bottom" id="DAc-qg-wfn"/>
+                                <constraint firstAttribute="bottom" secondItem="5fd-N2-D31" secondAttribute="bottom" constant="30" id="DAc-qg-wfn"/>
                                 <constraint firstItem="5fd-N2-D31" firstAttribute="leading" secondItem="xmu-7h-lZ3" secondAttribute="leading" constant="20" id="Q7E-u3-IZ6"/>
                                 <constraint firstItem="5fd-N2-D31" firstAttribute="top" secondItem="xmu-7h-lZ3" secondAttribute="top" constant="30" id="hDX-ym-vXx"/>
                             </constraints>

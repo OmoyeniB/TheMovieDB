@@ -13,13 +13,25 @@ extension UIView {
     func downloadImage(with url: URL, images: UIImageView){
         images.sd_imageIndicator = SDWebImageActivityIndicator.gray
         images.sd_setImage(with: url) { (image, error, cache, urls) in
-                    if (error != nil) {
-                        images.image = UIImage(named: "placeholderr")
-                    } else {
-                        DispatchQueue.main.async {
-                            images.image = image
-                        }
-                    }
+            if (error != nil) {
+                images.image = UIImage(named: "placeholderr")
+            } else {
+                DispatchQueue.main.async {
+                    images.image = image
+                }
+            }
+        }
+    }
+    
+    func defaultTextForOverView(text: UITextView, dataText: MovieList) {
+        if dataText.overview == nil || dataText.overview == "" {
+            DispatchQueue.main.async {
+                text.text = "Ooop no overview was provided for this"
+            }
+        } else {
+            DispatchQueue.main.async {
+                text.text = dataText.overview
+            }
         }
     }
     
@@ -31,26 +43,6 @@ extension UIView {
         self.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = color.cgColor
-        self.layer.shadowOpacity = opacity
-        self.layer.shadowOffset = offSet
-        self.layer.shadowRadius = radius
-
-        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-      }
-    
-    func addShadowToImageView() {
-        self.layer.shadowRadius = 10
-        self.layer.shadowOffset = .zero
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowColor = UIColor.purple.cgColor
-        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-        self.layer.masksToBounds = false
-    }
     
 }
 

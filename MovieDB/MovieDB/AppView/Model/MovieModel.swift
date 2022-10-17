@@ -15,7 +15,7 @@ struct MovieData: Codable {
 }
 
 // MARK: - Result
-struct MovieList: Codable {
+struct MovieList: Codable, Equatable {
     let backdropPath: String?
     let genreIDS: [Int]?
     let id: Int?
@@ -28,8 +28,26 @@ struct MovieList: Codable {
     let firstAirDate: String?
     let name: String?
     let vote_average: String?
-   
+    
+    var isfavorited: Bool?
     var imageURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? poster_path ?? "")")!
+    }
+}
+
+struct FavoriteMovieList {
+    
+    let id: Int?
+    let overview: String?
+    let posterPath: String?
+    let releaseDate, title: String?
+    let voteAverage: Double?
+    let firstAirDate: String?
+    let name: String?
+    let vote_average: String?
+    
+    var isfavorited: Bool?
+    var imageURL: URL {
+        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
     }
 }

@@ -9,19 +9,12 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var favoriteData = [RealmFavoritedModelObjects]() {
-        didSet {
-           favoriteData = setUpFavoriedData()
-        }
-    }
-    var persistedData = FetchFavoritedDataFromRealm().data
     
     @IBOutlet weak var favoriteCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        favoriteCollectionView.backgroundColor = .red
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,17 +39,7 @@ class ProfileViewController: UIViewController {
         favoriteCollectionView.register(TVShowCollectionViewCell.self, forCellWithReuseIdentifier: TVShowCollectionViewCell.identifier)
     }
     
-    func setUpFavoriedData() -> [RealmFavoritedModelObjects] {
-        for persistedDatum in persistedData {
-            if persistedDatum.isLiked == true {
-                if !favoriteData.contains(where: { $0.id == persistedDatum.id}) {
-                    favoriteData.append(persistedDatum)
-                }
-            } else {
-            }
-        }
-        return favoriteData
-    }
+   
    
 }
 
@@ -73,7 +56,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVShowCollectionViewCell.identifier, for: indexPath) as? TVShowCollectionViewCell
-        cell?.backgroundColor = .yellow
+        cell?.contentView.backgroundColor = Constants.Colors.darkColor
         return cell ?? UICollectionViewCell()
     }
     

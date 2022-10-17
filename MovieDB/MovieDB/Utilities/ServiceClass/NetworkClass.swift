@@ -57,18 +57,10 @@ final class NetworkManagerRepository: MovieService {
                 return nil
             }
             return queryUrlComponents(urlComponents: urlComponents)
-            
-        } else if endpoint == .tv_series_episode {
-            guard let urlComponents = URLComponents(string: "\(baseAPIURL)/\(endpoint.rawValue)\(id ?? 0)/season/\(seasonNumber ?? 0)") else {
-                return nil
-            }
-            return queryUrlComponents(urlComponents: urlComponents)
-            
         } else if endpoint == .series_casts {
             guard let urlComponents = URLComponents(string: "\(baseAPIURL)\(endpoint.rawValue)/\(id ?? 0)/credits") else {
                 return nil
             }
-            print(urlComponents)
             return queryUrlComponents(urlComponents: urlComponents)
         }
         else {
