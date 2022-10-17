@@ -28,15 +28,19 @@ class BottomSheetViewControllerViewController: UIViewController {
     func handleDelegatePerformance(_ indexPath: IndexPath) {
         
         switch indexPath.row {
-        case 0:
-            print(indexPath.row)
         case 1:
             let vc3 = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
             let navController = UINavigationController(rootViewController: vc3)
             navController.modalPresentationStyle = .formSheet
             self.present(navController, animated: true, completion: nil)
         case 2:
-            print(indexPath.row)
+            weak var presentVc = self.presentingViewController
+            self.dismiss(animated: true, completion: {
+                let vc = ProfileViewController()
+                vc.modalPresentationStyle = .custom
+                vc.modalTransitionStyle = .crossDissolve
+                presentVc?.present(vc, animated: true, completion: nil)
+            })
         case 3:
             self.dismiss(animated: true)
         default:

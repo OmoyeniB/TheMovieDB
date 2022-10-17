@@ -9,6 +9,13 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var favoriteData = [RealmFavoritedModelObjects]() {
+        didSet {
+           favoriteData = setUpFavoriedData()
+        }
+    }
+    var persistedData = FetchFavoritedDataFromRealm().data
+    
     @IBOutlet weak var favoriteCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -37,6 +44,18 @@ class ProfileViewController: UIViewController {
         favoriteCollectionView.dataSource = self
         favoriteCollectionView.delegate = self
         favoriteCollectionView.register(TVShowCollectionViewCell.self, forCellWithReuseIdentifier: TVShowCollectionViewCell.identifier)
+    }
+    
+    func setUpFavoriedData() -> [RealmFavoritedModelObjects] {
+        for persistedDatum in persistedData {
+            if persistedDatum.isLiked == true {
+                if !favoriteData.contains(where: { $0.id == persistedDatum.id}) {
+                    favoriteData.append(persistedDatum)
+                }
+            } else {
+            }
+        }
+        return favoriteData
     }
    
 }
