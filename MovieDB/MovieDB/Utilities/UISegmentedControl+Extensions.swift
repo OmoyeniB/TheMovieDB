@@ -10,7 +10,7 @@ import UIKit
 extension UISegmentedControl {
     
     func adjustFont() {
-        let font = UIFont(name: Constants.Fonts.sf_pro_medium, size: 13) ?? UIFont.systemFont(ofSize: 13)
+        let font = UIFont(name: Constants.Fonts.sf_pro_bold, size: 10) ?? UIFont.systemFont(ofSize: 10)
         let normalAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: Constants.Colors.whiteColor as Any]
         self.setTitleTextAttributes(normalAttribute, for: .normal)
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: Constants.Colors.whiteColor as Any]
