@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MovieSeasonViewController" customModule="MovieDB" customModuleProvider="target">
             <connections>
                 <outlet property="movieSeasonTableView" destination="KfI-Z7-wdj" id="S4o-r6-7ET"/>
-                <outlet property="uiactivityController" destination="fZX-uQ-NWD" id="vOD-S2-Xzh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,20 +37,13 @@
                     <rect key="frame" x="0.0" y="136" width="390" height="708"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="fZX-uQ-NWD">
-                    <rect key="frame" x="176.66666666666666" y="403.66666666666669" width="37" height="37"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="tintColor" name="LightGreyColor"/>
-                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="AlmostBlackColor"/>
             <constraints>
                 <constraint firstItem="KfI-Z7-wdj" firstAttribute="top" secondItem="aE5-HG-467" secondAttribute="bottom" constant="46" id="1tq-eu-UwB"/>
-                <constraint firstItem="fZX-uQ-NWD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5A0-cH-zy6"/>
                 <constraint firstItem="KfI-Z7-wdj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9V7-jV-avH"/>
                 <constraint firstAttribute="bottom" secondItem="KfI-Z7-wdj" secondAttribute="bottom" id="EDe-GG-D1O"/>
-                <constraint firstItem="fZX-uQ-NWD" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="EtM-w2-piA"/>
                 <constraint firstItem="aE5-HG-467" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SrV-Xr-3Uk"/>
                 <constraint firstItem="KfI-Z7-wdj" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="dy4-Rd-ypV"/>
                 <constraint firstItem="aE5-HG-467" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="emQ-uz-azJ"/>

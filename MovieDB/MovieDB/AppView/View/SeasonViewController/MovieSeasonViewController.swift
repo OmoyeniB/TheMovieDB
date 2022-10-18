@@ -22,12 +22,10 @@ class MovieSeasonViewController: UIViewController {
     var episode = [Episode]()
     let movieDetailsViewModel = MovieDetailsViewModel()
     
-    @IBOutlet weak var uiactivityController: UIActivityIndicatorView!
     @IBOutlet weak var movieSeasonTableView: UITableView!
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        uiactivityController.startAnimating()
         configureTableView()
         movieDetailsViewModel.movieId = movieID
         setUpObservers()
@@ -106,8 +104,6 @@ extension MovieSeasonViewController: FetchedDataModelDelegate {
         DispatchQueue.main.async {[weak self] in
             self?.movieSeasonTableView.reloadData()
         }
-        self.uiactivityController.stopAnimating()
-        self.uiactivityController.isHidden = true
         movieDetailsViewModel.getEpisdoeOfSeason(seasonNumber)
     }
     

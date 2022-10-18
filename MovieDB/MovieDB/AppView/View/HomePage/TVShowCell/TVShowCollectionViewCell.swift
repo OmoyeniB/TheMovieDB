@@ -37,7 +37,9 @@ class TVShowCollectionViewCell: UICollectionViewCell {
         self.downloadImage(with: movieData.imageURL, images: movieImage)
         movieTitle.text = movieData.name
         defaultTextForOverView(text: movieDetails, dataText: movieData)
-        releasedDate.text = Date.getFormattedDate(string: movieData.firstAirDate ?? "", formatter: "yyyy-MM-dd")
+        DispatchQueue.main.async { [weak self] in
+            self?.releasedDate.text = Date.getFormattedDate(string: movieData.firstAirDate ?? "", formatter: "yyyy-MM-dd")
+        }
         movieRatings.setTitle(String(movieData.voteAverage ?? 0.0), for: .normal)
     }
     

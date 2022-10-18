@@ -15,8 +15,11 @@ class MovieCastCollectionViewCell: UICollectionViewCell {
     lazy var actorImage: UIImageView = {
         var actorImage = UIImageView()
         actorImage.contentMode = .scaleAspectFill
+        actorImage.layer.borderWidth = 1
+        actorImage.layer.masksToBounds = false
+        actorImage.layer.borderColor = UIColor.black.cgColor
+        actorImage.layer.cornerRadius = self.frame.height/2
         actorImage.clipsToBounds = true
-        actorImage.layer.masksToBounds = true
         return actorImage
     }()
     
