@@ -60,7 +60,7 @@ class MovieDetailsViewController: UIViewController {
         configureCollectionView()
         lastSeason.text = "\(seasonNumber)"
         averageRatings.text = "\(movieList?.voteAverage ?? 0.0)"
-        releasedDate.text = Date.getFormattedDate(string: movieList?.releaseDate ?? "", formatter: "yyyy-MM-dd")
+        releasedDate.text = Date.getFormattedDate(string: movieList?.firstAirDate ?? "", formatter: "yyyy-MM-dd")
         movieDescription.isEditable = false
         movieDescription.isScrollEnabled = true
     }

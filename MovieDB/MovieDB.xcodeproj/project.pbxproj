@@ -55,6 +55,11 @@
 		584C0F5A28F8B9E700A45ED0 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584C0F5928F8B9E700A45ED0 /* NetworkServiceProtocol.swift */; };
 		584C0F6028F965D100A45ED0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 584C0F5F28F965D100A45ED0 /* SDWebImage */; };
 		58BD734128FD500A000B1C6F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BD734028FD500A000B1C6F /* Date+Extension.swift */; };
+		58C0F2F829000169002B38AF /* FavoritePersistenceStore+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0F2F729000169002B38AF /* FavoritePersistenceStore+Protocol.swift */; };
+		58C0F2FA2900017C002B38AF /* FavoritePersistedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0F2F92900017C002B38AF /* FavoritePersistedObjects.swift */; };
+		58C0F30029000258002B38AF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 58C0F2FF29000258002B38AF /* Realm */; };
+		58C0F30229000258002B38AF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 58C0F30129000258002B38AF /* RealmSwift */; };
+		58C0F3042900032B002B38AF /* PersistenceStoreRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0F3032900032B002B38AF /* PersistenceStoreRespository.swift */; };
 		58D0DBAB28FA16C00013CB72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0DBAA28FA16C00013CB72 /* LoginViewController.swift */; };
 		58D0DBAF28FA171D0013CB72 /* UICollectionViewGenericDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0DBAC28FA171D0013CB72 /* UICollectionViewGenericDelegate.swift */; };
 		58D0DBB028FA171D0013CB72 /* UISegmentedControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0DBAD28FA171D0013CB72 /* UISegmentedControl+Extensions.swift */; };
@@ -130,6 +135,9 @@
 		584C0F5528F8473B00A45ED0 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		584C0F5928F8B9E700A45ED0 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		58BD734028FD500A000B1C6F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		58C0F2F729000169002B38AF /* FavoritePersistenceStore+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritePersistenceStore+Protocol.swift"; sourceTree = "<group>"; };
+		58C0F2F92900017C002B38AF /* FavoritePersistedObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePersistedObjects.swift; sourceTree = "<group>"; };
+		58C0F3032900032B002B38AF /* PersistenceStoreRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStoreRespository.swift; sourceTree = "<group>"; };
 		58D0DBAA28FA16C00013CB72 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		58D0DBAC28FA171D0013CB72 /* UICollectionViewGenericDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewGenericDelegate.swift; path = MovieDB/Utilities/UICollectionViewGenericDelegate.swift; sourceTree = SOURCE_ROOT; };
 		58D0DBAD28FA171D0013CB72 /* UISegmentedControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UISegmentedControl+Extensions.swift"; path = "MovieDB/Utilities/UISegmentedControl+Extensions.swift"; sourceTree = SOURCE_ROOT; };
@@ -145,10 +153,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58C0F30229000258002B38AF /* RealmSwift in Frameworks */,
 				583B42BD28FC18EB00A8FF2D /* FittedSheets in Frameworks */,
 				584C0F6028F965D100A45ED0 /* SDWebImage in Frameworks */,
 				583B42A328FB1D5300A8FF2D /* SnapKit in Frameworks */,
 				584C0F4428F804A900A45ED0 /* IQKeyboardManagerSwift in Frameworks */,
+				58C0F30029000258002B38AF /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +268,7 @@
 		580E3B9028F7308C006A2A7A /* AppView */ = {
 			isa = PBXGroup;
 			children = (
+				58C0F2F629000146002B38AF /* PersistenceStore */,
 				580E3B9328F7311F006A2A7A /* View */,
 				580E3B9228F730A6006A2A7A /* Model */,
 				580E3B9128F7309C006A2A7A /* ViewModel */,
@@ -397,6 +408,16 @@
 			path = ServiceClass;
 			sourceTree = "<group>";
 		};
+		58C0F2F629000146002B38AF /* PersistenceStore */ = {
+			isa = PBXGroup;
+			children = (
+				58C0F2F729000169002B38AF /* FavoritePersistenceStore+Protocol.swift */,
+				58C0F2F92900017C002B38AF /* FavoritePersistedObjects.swift */,
+				58C0F3032900032B002B38AF /* PersistenceStoreRespository.swift */,
+			);
+			path = PersistenceStore;
+			sourceTree = "<group>";
+		};
 		58C7908F28FCB9C700159339 /* CastPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +458,8 @@
 				584C0F5F28F965D100A45ED0 /* SDWebImage */,
 				583B42A228FB1D5300A8FF2D /* SnapKit */,
 				583B42BC28FC18EB00A8FF2D /* FittedSheets */,
+				58C0F2FF29000258002B38AF /* Realm */,
+				58C0F30129000258002B38AF /* RealmSwift */,
 			);
 			productName = MovieDB;
 			productReference = 580E3B5828F72D13006A2A7A /* MovieDB.app */;
@@ -518,6 +541,7 @@
 				584C0F5E28F965D100A45ED0 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				583B42A128FB1D5300A8FF2D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				583B42BB28FC18EB00A8FF2D /* XCRemoteSwiftPackageReference "FittedSheets" */,
+				58C0F2FE29000258002B38AF /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 580E3B5928F72D13006A2A7A /* Products */;
 			projectDirPath = "";
@@ -583,9 +607,11 @@
 				584C0F2E28F7ADCE00A45ED0 /* HomePageViewController.swift in Sources */,
 				583B42D228FC2BA900A8FF2D /* ProfileViewController.swift in Sources */,
 				584C0F3328F7B2C900A45ED0 /* TVShowCollectionViewCell.swift in Sources */,
+				58C0F3042900032B002B38AF /* PersistenceStoreRespository.swift in Sources */,
 				583B429228FA804C00A8FF2D /* CombineDataHandler.swift in Sources */,
 				584C0F4E28F81FDC00A45ED0 /* NetworkingErrorHandler.swift in Sources */,
 				580459A328FD7AE300DE1E4D /* MovieCastCollectionViewCell.swift in Sources */,
+				58C0F2F829000169002B38AF /* FavoritePersistenceStore+Protocol.swift in Sources */,
 				58D0DBB028FA171D0013CB72 /* UISegmentedControl+Extensions.swift in Sources */,
 				583B42C428FC1ECA00A8FF2D /* ProfileModel.swift in Sources */,
 				583B42A028FB1CB500A8FF2D /* TableViewSectionHeader.swift in Sources */,
@@ -599,6 +625,7 @@
 				584C0F5028F81FF400A45ED0 /* NetworkClass.swift in Sources */,
 				584C0F5228F83E3800A45ED0 /* MovieModel.swift in Sources */,
 				58D0DBB128FA171D0013CB72 /* UIViewController+Extensions.swift in Sources */,
+				58C0F2FA2900017C002B38AF /* FavoritePersistedObjects.swift in Sources */,
 				584C0F4C28F81FBF00A45ED0 /* CustomError.swift in Sources */,
 				583B429828FB0D4600A8FF2D /* MovieSeasonViewController.swift in Sources */,
 				584C0F3A28F7EE9300A45ED0 /* Constants.swift in Sources */,
@@ -984,6 +1011,14 @@
 				kind = branch;
 			};
 		};
+		58C0F2FE29000258002B38AF /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1011,6 +1046,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 584C0F5E28F965D100A45ED0 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		58C0F2FF29000258002B38AF /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58C0F2FE29000258002B38AF /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		58C0F30129000258002B38AF /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58C0F2FE29000258002B38AF /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
