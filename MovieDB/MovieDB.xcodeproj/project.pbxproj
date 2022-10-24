@@ -60,6 +60,7 @@
 		58C0F30029000258002B38AF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 58C0F2FF29000258002B38AF /* Realm */; };
 		58C0F30229000258002B38AF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 58C0F30129000258002B38AF /* RealmSwift */; };
 		58C0F3042900032B002B38AF /* PersistenceStoreRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0F3032900032B002B38AF /* PersistenceStoreRespository.swift */; };
+		58C0F30629000E15002B38AF /* FetchDataFromRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0F30529000E15002B38AF /* FetchDataFromRealm.swift */; };
 		58D0DBAB28FA16C00013CB72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0DBAA28FA16C00013CB72 /* LoginViewController.swift */; };
 		58D0DBAF28FA171D0013CB72 /* UICollectionViewGenericDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0DBAC28FA171D0013CB72 /* UICollectionViewGenericDelegate.swift */; };
 		58D0DBB028FA171D0013CB72 /* UISegmentedControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0DBAD28FA171D0013CB72 /* UISegmentedControl+Extensions.swift */; };
@@ -138,6 +139,7 @@
 		58C0F2F729000169002B38AF /* FavoritePersistenceStore+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritePersistenceStore+Protocol.swift"; sourceTree = "<group>"; };
 		58C0F2F92900017C002B38AF /* FavoritePersistedObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePersistedObjects.swift; sourceTree = "<group>"; };
 		58C0F3032900032B002B38AF /* PersistenceStoreRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStoreRespository.swift; sourceTree = "<group>"; };
+		58C0F30529000E15002B38AF /* FetchDataFromRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataFromRealm.swift; sourceTree = "<group>"; };
 		58D0DBAA28FA16C00013CB72 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		58D0DBAC28FA171D0013CB72 /* UICollectionViewGenericDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICollectionViewGenericDelegate.swift; path = MovieDB/Utilities/UICollectionViewGenericDelegate.swift; sourceTree = SOURCE_ROOT; };
 		58D0DBAD28FA171D0013CB72 /* UISegmentedControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UISegmentedControl+Extensions.swift"; path = "MovieDB/Utilities/UISegmentedControl+Extensions.swift"; sourceTree = SOURCE_ROOT; };
@@ -414,6 +416,7 @@
 				58C0F2F729000169002B38AF /* FavoritePersistenceStore+Protocol.swift */,
 				58C0F2F92900017C002B38AF /* FavoritePersistedObjects.swift */,
 				58C0F3032900032B002B38AF /* PersistenceStoreRespository.swift */,
+				58C0F30529000E15002B38AF /* FetchDataFromRealm.swift */,
 			);
 			path = PersistenceStore;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				58C0F2F829000169002B38AF /* FavoritePersistenceStore+Protocol.swift in Sources */,
 				58D0DBB028FA171D0013CB72 /* UISegmentedControl+Extensions.swift in Sources */,
 				583B42C428FC1ECA00A8FF2D /* ProfileModel.swift in Sources */,
+				58C0F30629000E15002B38AF /* FetchDataFromRealm.swift in Sources */,
 				583B42A028FB1CB500A8FF2D /* TableViewSectionHeader.swift in Sources */,
 				583B429428FAE15300A8FF2D /* Movie_SeasonModel.swift in Sources */,
 				58D0DBAF28FA171D0013CB72 /* UICollectionViewGenericDelegate.swift in Sources */,

@@ -7,15 +7,25 @@
 
 import UIKit
 
+import RealmSwift
 
 class MovieDetailsViewController: UIViewController {
     
+    let newArr = FavouriteBookObject()
+    var isFavorite: Bool = false {
+        didSet {
+            }
+        }
+    fileprivate let realm = try! Realm()
+    var persistedData = [FavouriteBookObject]()
+    var persistenceStore = PersistenceStoreRespository()
     var alreadyContained = false
     var isliked = false
     var totalNumberOfTvSeriesSeason: Int = 0
     var movieList: MovieList?
     var creator: [String] = [String]()
     var episode = [Episode]()
+    var isFavorited = [FavouriteBookObject]()
     let movieDetailsViewModel = MovieDetailsViewModel()
     var movieCast = [Cast]()
     var seasonNumber = 0 {
@@ -46,12 +56,33 @@ class MovieDetailsViewController: UIViewController {
         movieDetailsViewModel.closure = {
             self.movieCastCollectionView.reloadData()
         }
+        persistedData = FetchAudioBookDataFromRealm().data
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavBar()
         setNavbarOpacity()
+        persistedData = FetchAudioBookDataFromRealm().data
+       
+        if persistedData.contains(where: {$0.id == movieList?.id}) {
+            movieDetailsViewModel.liked = UserDefaults.standard.bool(forKey: "alreadyLiked")
+            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            print(movieDetailsViewModel.liked)
+        } else {
+            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+      
+//
+//        if movieDetailsViewModel.liked {
+//            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//        } else {
+//            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+//        }
+    }
+    
+    func isItemLiked(id: FavouriteBookObject) -> Bool {
+        return id.isLiked
     }
     
     func configureView() {
@@ -117,8 +148,35 @@ class MovieDetailsViewController: UIViewController {
     
     
     @IBAction func clickToFavorite(_ sender: UIButton) {
+        newArr.id = movieList?.id ?? 0
+        newArr.image = movieList?.backdropPath ?? ""
+        newArr.title = movieList?.title ?? ""
+        newArr.ratings = movieList?.voteAverage ?? 0.0
+        newArr.overview = movieList?.overview ?? ""
         
+        persistedData = FetchAudioBookDataFromRealm().data
+       
+        if persistedData.contains(where: {$0.id == newArr.id}) {
+//            movieDetailsViewModel.liked = false
+            persistedData = FetchAudioBookDataFromRealm().data
+//            persistenceStore.realmDelete(code: newArr)
+//            persistedData = FetchAudioBookDataFromRealm().data
+//            favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+//            print("deleted", movieDetailsViewModel.liked,":movieDetailsViewModel.liked")
+            print("deleted")
+           
+        } else {
+            persistenceStore.save(items: newArr)
+//            persistedData = FetchAudioBookDataFromRealm().data
+//            favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//            print("liked", movieDetailsViewModel.liked,":movieDetailsViewModel.liked")
+            print("liked")
+        }
+        persistedData = FetchAudioBookDataFromRealm().data
+       
     }
+    
+    
     
     func setNavBar() {
         let backButton = UIBarButtonItem()
